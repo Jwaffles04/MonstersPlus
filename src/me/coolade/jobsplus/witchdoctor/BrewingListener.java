@@ -32,6 +32,7 @@ import org.bukkit.material.Cauldron;
 import me.coolade.jobsplus.JobsListener;
 import me.coolade.monstersplus.Tools;
 
+@SuppressWarnings("deprecation")
 public class BrewingListener implements Listener {
 	public static final int BREWING_LEVEL = 2;
 	public static final int STIR_LEVEL1 = 7;
@@ -41,7 +42,6 @@ public class BrewingListener implements Listener {
 	public static HashMap<Location, CustomCauldron> cauldList = new HashMap<Location, CustomCauldron>();
 	public static ArrayList<Location> locationList = new ArrayList<Location>();
 
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onRightClickCauldron(PlayerInteractEvent event) {
 		/*
@@ -81,7 +81,7 @@ public class BrewingListener implements Listener {
 		}
 
 		// The initial starting process for the cauldron
-		if (inhand.getType() == Material.NETHER_STALK && custCauld == null) {
+		if (inhand.getType() == Material.NETHER_WART && custCauld == null) {
 			int jobsLevel = JobsListener.getJobLevel(player.getName(), "WitchDoctor");
 			if (jobsLevel < BREWING_LEVEL) {
 				player.sendMessage(ChatColor.RED + "Custom brewing is only available for level " + ChatColor.GOLD

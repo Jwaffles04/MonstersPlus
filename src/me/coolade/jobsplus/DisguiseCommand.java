@@ -177,7 +177,7 @@ public class DisguiseCommand {
 			} else if (name.equalsIgnoreCase("MagmaCube")) {
 				disg = new MobDisguise(DisguiseType.MAGMA_CUBE, true);
 			} else if (name.equalsIgnoreCase("ZombieHorse")) {
-				disg = new MobDisguise(DisguiseType.UNDEAD_HORSE, true);
+				disg = new MobDisguise(DisguiseType.ZOMBIE_HORSE, true);
 			} else if (name.equalsIgnoreCase("WitherSkeleton")) {
 				disg = new MobDisguise(DisguiseType.WITHER_SKELETON, true);
 			} else if (name.equalsIgnoreCase("Wither")) {
@@ -205,7 +205,7 @@ public class DisguiseCommand {
 			} else if (name.equalsIgnoreCase("Blacksmith")) {
 				disg = new MobDisguise(DisguiseType.VILLAGER, true);
 				VillagerWatcher watcher = (VillagerWatcher) disg.getWatcher();
-				watcher.setProfession(Profession.BLACKSMITH);
+				watcher.setProfession(Profession.WEAPONSMITH);
 			} else if (name.equalsIgnoreCase("Librarian")) {
 				disg = new MobDisguise(DisguiseType.VILLAGER, true);
 				VillagerWatcher watcher = (VillagerWatcher) disg.getWatcher();
@@ -254,8 +254,8 @@ public class DisguiseCommand {
 				disg = new MobDisguise(DisguiseType.SKELETON, true);
 				LivingWatcher watcher = (LivingWatcher) disg.getWatcher();
 				watcher.setArmor(
-						new ItemStack[] { new ItemStack(Material.GOLD_BOOTS), new ItemStack(Material.GOLD_LEGGINGS),
-								new ItemStack(Material.GOLD_CHESTPLATE), new ItemStack(Material.GOLD_HELMET) });
+						new ItemStack[] { new ItemStack(Material.GOLDEN_BOOTS), new ItemStack(Material.GOLDEN_LEGGINGS),
+								new ItemStack(Material.GOLDEN_CHESTPLATE), new ItemStack(Material.GOLDEN_HELMET) });
 			} else {
 				disg = new MobDisguise(DisguiseType.getType(EntityType.fromName(dset.getName())), true);
 			}

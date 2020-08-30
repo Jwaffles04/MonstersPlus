@@ -6,10 +6,12 @@ import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 
 public class CustomRecipes {
 	public static final ArrayList<RecipeSet> arrowList = new ArrayList<RecipeSet>() {
@@ -87,9 +89,9 @@ public class CustomRecipes {
 			add(new RecipeSet("Chiseled Stone Brick", "Builder", 4, "Chiseled Stone Brick",
 					"2. Flint 4. Flint 5. Stone Brick 6. Flint 8. Flint"));
 			add(new RecipeSet("Mossy Cobblestone", "Builder", 5, "Mossy Cobblestone",
-					"2. Seeds 4. Seeds 5. Cobblestone 6. Seeds 8. Seeds"));
+					"2. WHEAT_SEEDS 4. WHEAT_SEEDS 5. Cobblestone 6. WHEAT_SEEDS 8. WHEAT_SEEDS"));
 			add(new RecipeSet("Mossy Stone Brick", "Builder", 6, "Mossy Stone Brick",
-					"2. Seeds 4. Seeds 5. Stonebrick 6. Seeds 8. Seeds"));
+					"2. WHEAT_SEEDS 4. WHEAT_SEEDS 5. Stonebrick 6. WHEAT_SEEDS 8. WHEAT_SEEDS"));
 			add(new RecipeSet("End Portal", "Builder", 10, "End Portal",
 					"1. Emerald 2. Emerald 3. Emerald 4-9. Enderstone"));
 		}
@@ -98,12 +100,12 @@ public class CustomRecipes {
 		private static final long serialVersionUID = 1L;
 
 		{
-			add(new RecipeSet("Chicken", "Farmer", 2, "Chicken Spawn Egg", "1-4. Seeds 5. Egg  6-9. Seeds"));
+			add(new RecipeSet("Chicken", "Farmer", 2, "Chicken Spawn Egg", "1-4. WHEAT_SEEDS 5. Egg  6-9. WHEAT_SEEDS"));
 			add(new RecipeSet("Cow", "Farmer", 3, "Cow Spawn Egg", "1-4. Wheat 5. Egg  6-9. Wheat"));
 			add(new RecipeSet("Pig", "Farmer", 4, "Pig Spawn Egg", "1-4. Carrot 5. Egg  6-9. Carrot"));
 			add(new RecipeSet("Sheep", "Farmer", 5, "Sheep Spawn Egg", "1-4. Wool 5. Egg  6-9. Wool"));
 			add(new RecipeSet("Squid", "Farmer", 5, "Squid Spawn Egg", "1-4. Inksac 5. Egg  6-9. Inksac"));
-			add(new RecipeSet("Wolf", "Farmer", 6, "Wolf Spawn Egg", "1-4. Bone 5. Egg  6-9. Melon Seeds"));
+			add(new RecipeSet("Wolf", "Farmer", 6, "Wolf Spawn Egg", "1-4. Bone 5. Egg  6-9. Melon WHEAT_SEEDS"));
 			add(new RecipeSet("Ocelot", "Farmer", 8, "Ocelot Spawn Egg", "1-4. Milk 5. Egg  6-9. Milk"));
 			add(new RecipeSet("Spider", "Farmer", 9, "Spider Spawn Egg",
 					"1. Lapis Block 2-4. Spider Eye 5. Egg  6-9. Spider Eye"));
@@ -154,6 +156,8 @@ public class CustomRecipes {
 		}
 	};
 
+
+
 	@SuppressWarnings("deprecation")
 	public CustomRecipes() {
 		/*
@@ -169,7 +173,8 @@ public class CustomRecipes {
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 
-		ShapedRecipe recipe = new ShapedRecipe(item);
+		NamespacedKey key = new NamespacedKey((Plugin) this, "repulse_arrow");
+		ShapedRecipe recipe = new ShapedRecipe(key, item);
 		recipe.shape(" E ", " S ", " F ");
 		recipe.setIngredient('S', Material.STICK);
 		recipe.setIngredient('F', Material.FEATHER);
@@ -271,7 +276,7 @@ public class CustomRecipes {
 		recipe.shape("EEE", " S ", " F ");
 		recipe.setIngredient('S', Material.STICK);
 		recipe.setIngredient('F', Material.FEATHER);
-		recipe.setIngredient('E', Material.SULPHUR);
+		recipe.setIngredient('E', Material.GUNPOWDER);
 		Bukkit.addRecipe(recipe);
 
 		/** Fireball Arrow **/
@@ -285,7 +290,7 @@ public class CustomRecipes {
 		recipe.shape("ABA", " S ", " F ");
 		recipe.setIngredient('S', Material.STICK);
 		recipe.setIngredient('F', Material.FEATHER);
-		recipe.setIngredient('B', Material.SULPHUR);
+		recipe.setIngredient('B', Material.GUNPOWDER);
 		recipe.setIngredient('A', Material.COAL);
 		Bukkit.addRecipe(recipe);
 
@@ -301,7 +306,7 @@ public class CustomRecipes {
 		recipe.setIngredient('S', Material.STICK);
 		recipe.setIngredient('F', Material.FEATHER);
 		recipe.setIngredient('B', Material.BLAZE_ROD);
-		recipe.setIngredient('A', Material.SULPHUR);
+		recipe.setIngredient('A', Material.GUNPOWDER);
 		Bukkit.addRecipe(recipe);
 
 		/** Skull Arrow **/
@@ -358,7 +363,7 @@ public class CustomRecipes {
 		recipe.shape(" A ", " S ", " F ");
 		recipe.setIngredient('S', Material.STICK);
 		recipe.setIngredient('F', Material.FEATHER);
-		recipe.setIngredient('A', Material.LEASH);
+		recipe.setIngredient('A', Material.LEAD);
 		Bukkit.addRecipe(recipe);
 
 		/** Net Arrow **/
@@ -404,7 +409,7 @@ public class CustomRecipes {
 		Bukkit.addRecipe(recipe);
 
 		/** Chiseled Stone Brick **/
-		item = new ItemStack(Material.SMOOTH_BRICK, 1, (short) 3);
+		item = new ItemStack(Material.STONE_BRICKS, 1, (short) 3);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN + "Chiseled Stone Brick");
 		meta.setLore(Arrays.asList("Unique"));
@@ -412,11 +417,11 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape(" A ", "ABA", " A ");
 		recipe.setIngredient('A', Material.FLINT);
-		recipe.setIngredient('B', Material.SMOOTH_BRICK);
+		recipe.setIngredient('B', Material.STONE_BRICKS);
 		Bukkit.addRecipe(recipe);
 
 		/** Cracked Stone Brick **/
-		item = new ItemStack(Material.SMOOTH_BRICK, 1, (short) 2);
+		item = new ItemStack(Material.STONE_BRICKS, 1, (short) 2);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN + "Cracked Stone Brick");
 		meta.setLore(Arrays.asList("Unique"));
@@ -424,7 +429,7 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("BA ", "   ", "  ");
 		recipe.setIngredient('A', Material.FLINT);
-		recipe.setIngredient('B', Material.SMOOTH_BRICK);
+		recipe.setIngredient('B', Material.STONE_BRICKS);
 		Bukkit.addRecipe(recipe);
 
 		/** Mossy Cobblestone **/
@@ -435,24 +440,24 @@ public class CustomRecipes {
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape(" A ", "ABA", " A ");
-		recipe.setIngredient('A', Material.SEEDS);
+		recipe.setIngredient('A', Material.WHEAT_SEEDS);
 		recipe.setIngredient('B', Material.COBBLESTONE);
 		Bukkit.addRecipe(recipe);
 
 		/** Mossy Stone Brick **/
-		item = new ItemStack(Material.SMOOTH_BRICK, 1, (short) 1);
+		item = new ItemStack(Material.STONE_BRICKS, 1, (short) 1);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN + "Mossy Stone Brick");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape(" A ", "ABA", " A ");
-		recipe.setIngredient('A', Material.SEEDS);
-		recipe.setIngredient('B', Material.SMOOTH_BRICK);
+		recipe.setIngredient('A', Material.WHEAT_SEEDS);
+		recipe.setIngredient('B', Material.STONE_BRICKS);
 		Bukkit.addRecipe(recipe);
 
 		/** Ender Portal Frame **/
-		item = new ItemStack(Material.ENDER_PORTAL_FRAME, 1);
+		item = new ItemStack(Material.END_PORTAL_FRAME, 1);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN + "End Portal");
 		meta.setLore(Arrays.asList("Unique"));
@@ -460,10 +465,10 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "BBB", "BBB");
 		recipe.setIngredient('A', Material.EMERALD);
-		recipe.setIngredient('B', Material.ENDER_STONE);
+		recipe.setIngredient('B', Material.END_STONE);
 		Bukkit.addRecipe(recipe);
 
-		/** Saddle **/
+/*		*//** Saddle **//*
 		item = new ItemStack(Material.SADDLE, 1);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN + "Saddle");
@@ -475,8 +480,8 @@ public class CustomRecipes {
 		recipe.setIngredient('B', Material.STRING);
 		Bukkit.addRecipe(recipe);
 
-		/** Golden Horse Armor **/
-		item = new ItemStack(Material.GOLD_BARDING, 1);
+		*//** Golden Horse Armor **//*
+		item = new ItemStack(Material.GOLDEN_HORSE_ARMOR, 1);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN + "Golden Horse Armor");
 		meta.setLore(Arrays.asList("Unique"));
@@ -486,8 +491,8 @@ public class CustomRecipes {
 		recipe.setIngredient('A', Material.GOLD_INGOT);
 		Bukkit.addRecipe(recipe);
 
-		/** Iron Horse Armor **/
-		item = new ItemStack(Material.IRON_BARDING, 1);
+		*//** Iron Horse Armor **//*
+		item = new ItemStack(Material.IRON_HORSE_ARMOR, 1);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN + "Iron Horse Armor");
 		meta.setLore(Arrays.asList("Unique"));
@@ -497,8 +502,8 @@ public class CustomRecipes {
 		recipe.setIngredient('A', Material.IRON_INGOT);
 		Bukkit.addRecipe(recipe);
 
-		/** Diamond Horse Armor **/
-		item = new ItemStack(Material.DIAMOND_BARDING, 1);
+		*//** Diamond Horse Armor **//*
+		item = new ItemStack(Material.DIAMOND_HORSE_ARMOR, 1);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN + "Diamond Horse Armor");
 		meta.setLore(Arrays.asList("Unique"));
@@ -507,21 +512,21 @@ public class CustomRecipes {
 		recipe.shape("  A", "AA ", "AA ");
 		recipe.setIngredient('A', Material.DIAMOND);
 		Bukkit.addRecipe(recipe);
-
-		/** Chicken Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 93);
+*//**
+		/** Chicken Spawn Egg **//*
+		item = new ItemStack(Material.CHICKEN_SPAWN_EGG, 1, (short) 93);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Chicken");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
-		recipe.setIngredient('A', Material.SEEDS);
+		recipe.setIngredient('A', Material.WHEAT_SEEDS);
 		recipe.setIngredient('B', Material.EGG);
 		Bukkit.addRecipe(recipe);
 
-		/** Cow Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 92);
+		*//** Cow Spawn Egg **//*
+		item = new ItemStack(Material.COW_SPAWN_EGG, 1, (short) 92);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Cow");
 		meta.setLore(Arrays.asList("Unique"));
@@ -532,44 +537,44 @@ public class CustomRecipes {
 		recipe.setIngredient('B', Material.EGG);
 		Bukkit.addRecipe(recipe);
 
-		/** Pig Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 90);
+		*//** Pig Spawn Egg **//*
+		item = new ItemStack(Material.PIG_SPAWN_EGG, 1, (short) 90);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Pig");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
-		recipe.setIngredient('A', Material.CARROT_ITEM);
+		recipe.setIngredient('A', Material.CARROT);
 		recipe.setIngredient('B', Material.EGG);
 		Bukkit.addRecipe(recipe);
 
-		/** Sheep Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 91);
+		*//** Sheep Spawn Egg **//*
+		item = new ItemStack(Material.SHEEP_SPAWN_EGG, 1, (short) 91);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Sheep");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
-		recipe.setIngredient('A', Material.WOOL);
+		recipe.setIngredient('A', Material.LEGACY_WOOL);
 		recipe.setIngredient('B', Material.EGG);
 		Bukkit.addRecipe(recipe);
 
-		/** Squid Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 94);
+		*//** Squid Spawn Egg **//*
+		item = new ItemStack(Material.SQUID_SPAWN_EGG, 1, (short) 94);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Squid");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
-		recipe.setIngredient('A', Material.INK_SACK);
+		recipe.setIngredient('A', Material.INK_SAC);
 		recipe.setIngredient('B', Material.EGG);
 		Bukkit.addRecipe(recipe);
 
-		/** Wolf Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 95);
+		*//** Wolf Spawn Egg **//*
+		item = new ItemStack(Material.WOLF_SPAWN_EGG, 1, (short) 95);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Wolf");
 		meta.setLore(Arrays.asList("Unique"));
@@ -581,8 +586,8 @@ public class CustomRecipes {
 		recipe.setIngredient('C', Material.MELON_SEEDS);
 		Bukkit.addRecipe(recipe);
 
-		/** Ocelot Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 98);
+		*//** Ocelot Spawn Egg **//*
+		item = new ItemStack(Material.OCELOT_SPAWN_EGG, 1, (short) 98);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Ocelot");
 		meta.setLore(Arrays.asList("Unique"));
@@ -593,32 +598,32 @@ public class CustomRecipes {
 		recipe.setIngredient('B', Material.EGG);
 		Bukkit.addRecipe(recipe);
 
-		/** Mooshroom Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 96);
+		*//** Mooshroom Spawn Egg **//*
+		item = new ItemStack(Material.MOOSHROOM_SPAWN_EGG, 1, (short) 96);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Mooshroom");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
-		recipe.setIngredient('A', Material.MUSHROOM_SOUP);
+		recipe.setIngredient('A', Material.MUSHROOM_STEW);
 		recipe.setIngredient('B', Material.EGG);
 		Bukkit.addRecipe(recipe);
 
-		/** Horse Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 100);
+		*//** Horse Spawn Egg **//*
+		item = new ItemStack(Material.HORSE_SPAWN_EGG, 1, (short) 100);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Horse");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
-		recipe.setIngredient('A', Material.LEASH);
+		recipe.setIngredient('A', Material.LEAD);
 		recipe.setIngredient('B', Material.EGG);
 		Bukkit.addRecipe(recipe);
 
-		/** Villager Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 120);
+		*//** Villager Spawn Egg **//*
+		item = new ItemStack(Material.VILLAGER_SPAWN_EGG, 1, (short) 120);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Villager");
 		meta.setLore(Arrays.asList("Unique"));
@@ -629,21 +634,21 @@ public class CustomRecipes {
 		recipe.setIngredient('B', Material.EGG);
 		Bukkit.addRecipe(recipe);
 
-		/** Zombie Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 54);
+		*//** Zombie Spawn Egg **//*
+		item = new ItemStack(Material.ZOMBIE_SPAWN_EGG);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Zombie");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
-		recipe = new ShapedRecipe(item);
+		recipe = new ShapedRecipe(key, item);
 		recipe.shape("CAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.ROTTEN_FLESH);
 		recipe.setIngredient('B', Material.EGG);
 		recipe.setIngredient('C', Material.LAPIS_BLOCK);
 		Bukkit.addRecipe(recipe);
 
-		/** Skeleton Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 51);
+		*//** Skeleton Spawn Egg **//*
+		item = new ItemStack(Material.SKELETON_SPAWN_EGG, 1, (short) 51);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Skeleton");
 		meta.setLore(Arrays.asList("Unique"));
@@ -655,21 +660,21 @@ public class CustomRecipes {
 		recipe.setIngredient('C', Material.LAPIS_BLOCK);
 		Bukkit.addRecipe(recipe);
 
-		/** Creeper Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 50);
+		*//** Creeper Spawn Egg **//*
+		item = new ItemStack(Material.CREEPER_SPAWN_EGG, 1, (short) 50);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Creeper");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape("CAA", "ABA", "AAA");
-		recipe.setIngredient('A', Material.SULPHUR);
+		recipe.setIngredient('A', Material.GUNPOWDER);
 		recipe.setIngredient('B', Material.EGG);
 		recipe.setIngredient('C', Material.LAPIS_BLOCK);
 		Bukkit.addRecipe(recipe);
 
-		/** Spider Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 52);
+		*//** Spider Spawn Egg **//*
+		item = new ItemStack(Material.SPIDER_SPAWN_EGG, 1, (short) 52);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Spider");
 		meta.setLore(Arrays.asList("Unique"));
@@ -681,8 +686,8 @@ public class CustomRecipes {
 		recipe.setIngredient('C', Material.LAPIS_BLOCK);
 		Bukkit.addRecipe(recipe);
 
-		/** Enderman Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 58);
+		*//** Enderman Spawn Egg **//*
+		item = new ItemStack(Material.ENDERMAN_SPAWN_EGG, 1, (short) 58);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Enderman");
 		meta.setLore(Arrays.asList("Unique"));
@@ -694,8 +699,8 @@ public class CustomRecipes {
 		recipe.setIngredient('C', Material.LAPIS_BLOCK);
 		Bukkit.addRecipe(recipe);
 
-		/** Slime Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 55);
+		*//** Slime Spawn Egg **//*
+		item = new ItemStack(Material.SLIME_SPAWN_EGG, 1, (short) 55);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Slime");
 		meta.setLore(Arrays.asList("Unique"));
@@ -707,8 +712,8 @@ public class CustomRecipes {
 		recipe.setIngredient('C', Material.LAPIS_BLOCK);
 		Bukkit.addRecipe(recipe);
 
-		/** Blaze Spawn Egg **/
-		item = new ItemStack(Material.MONSTER_EGG, 1, (short) 61);
+		*//** Blaze Spawn Egg **//*
+		item = new ItemStack(Material.BLAZE_SPAWN_EGG, 1, (short) 61);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.WHITE + "Blaze");
 		meta.setLore(Arrays.asList("Unique"));
@@ -720,8 +725,8 @@ public class CustomRecipes {
 		recipe.setIngredient('C', Material.LAPIS_BLOCK);
 		Bukkit.addRecipe(recipe);
 
-		/** CaveSpider Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 59);
+		*//** CaveSpider Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 59);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Cave Spider" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
@@ -729,11 +734,11 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.STRING);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Spider Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 52);
+		*//** Spider Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 52);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Spider" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
@@ -741,11 +746,11 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.SPIDER_EYE);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Bat Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 65);
+		*//** Bat Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 65);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Bat" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
@@ -753,11 +758,11 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.COAL);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Zombie Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 54);
+		*//** Zombie Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 54);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Zombie" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
@@ -765,11 +770,11 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.ROTTEN_FLESH);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Skeleton Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 51);
+		*//** Skeleton Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 51);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Skeleton" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
@@ -777,23 +782,23 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.BONE);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Creeper Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 50);
+		*//** Creeper Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 50);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Creeper" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
-		recipe.setIngredient('A', Material.SULPHUR);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('A', Material.GUNPOWDER);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Enderman Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 58);
+		*//** Enderman Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 58);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Enderman" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
@@ -801,11 +806,11 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.ENDER_PEARL);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Blaze Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 61);
+		*//** Blaze Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 61);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Blaze" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
@@ -813,23 +818,23 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.BLAZE_ROD);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Silverfish Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 60);
+		*//** Silverfish Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 60);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Silverfish" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
 		item.setItemMeta(meta);
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
-		recipe.setIngredient('A', Material.RAW_FISH);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('A', Material.COD);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Zombie Pigman Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 57);
+		*//** Zombie Pigman Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 57);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Zombie Pigman" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
@@ -837,11 +842,11 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.GOLD_ORE);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
 
-		/** Snow Golem Spawner **/
-		item = new ItemStack(Material.MOB_SPAWNER, 1, (short) 97);
+		*//** Snow Golem Spawner **//*
+		item = new ItemStack(Material.SPAWNER, 1, (short) 97);
 		meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.YELLOW + "Snow Golem" + ChatColor.WHITE + " Spawner");
 		meta.setLore(Arrays.asList("Unique"));
@@ -849,9 +854,9 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("AAA", "ABA", "AAA");
 		recipe.setIngredient('A', Material.EGG);
-		recipe.setIngredient('B', Material.MOB_SPAWNER, -1);
+		recipe.setIngredient('B', Material.SPAWNER, -1);
 		Bukkit.addRecipe(recipe);
-
+**/
 		/** Survivalist Bomb **/
 		item = new ItemStack(Material.EGG, 3);
 		meta = item.getItemMeta();
@@ -861,7 +866,7 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("BCB", "BAB", "BBB");
 		recipe.setIngredient('A', Material.EGG);
-		recipe.setIngredient('B', Material.SULPHUR);
+		recipe.setIngredient('B', Material.GUNPOWDER);
 		recipe.setIngredient('C', Material.IRON_AXE);
 		Bukkit.addRecipe(recipe);
 		/** Warrior Bomb **/
@@ -873,7 +878,7 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("BCB", "BAB", "BBB");
 		recipe.setIngredient('A', Material.EGG);
-		recipe.setIngredient('B', Material.SULPHUR);
+		recipe.setIngredient('B', Material.GUNPOWDER);
 		recipe.setIngredient('C', Material.IRON_SWORD);
 		Bukkit.addRecipe(recipe);
 		/** WitchDoctor Bomb **/
@@ -885,7 +890,7 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("BCB", "BAB", "BBB");
 		recipe.setIngredient('A', Material.EGG);
-		recipe.setIngredient('B', Material.SULPHUR);
+		recipe.setIngredient('B', Material.GUNPOWDER);
 		recipe.setIngredient('C', Material.GLASS_BOTTLE);
 		Bukkit.addRecipe(recipe);
 		/** Miner Bomb **/
@@ -897,7 +902,7 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("BCB", "BAB", "BBB");
 		recipe.setIngredient('A', Material.EGG);
-		recipe.setIngredient('B', Material.SULPHUR);
+		recipe.setIngredient('B', Material.GUNPOWDER);
 		recipe.setIngredient('C', Material.IRON_PICKAXE);
 		Bukkit.addRecipe(recipe);
 		/** Fisherman Bomb **/
@@ -909,7 +914,7 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("BCB", "BAB", "BBB");
 		recipe.setIngredient('A', Material.EGG);
-		recipe.setIngredient('B', Material.SULPHUR);
+		recipe.setIngredient('B', Material.GUNPOWDER);
 		recipe.setIngredient('C', Material.FISHING_ROD);
 		Bukkit.addRecipe(recipe);
 		/** Blacksmith Bomb **/
@@ -921,7 +926,7 @@ public class CustomRecipes {
 		recipe = new ShapedRecipe(item);
 		recipe.shape("BCB", "BAB", "BBB");
 		recipe.setIngredient('A', Material.EGG);
-		recipe.setIngredient('B', Material.SULPHUR);
+		recipe.setIngredient('B', Material.GUNPOWDER);
 		recipe.setIngredient('C', Material.FURNACE);
 		Bukkit.addRecipe(recipe);
 	}
@@ -1061,3 +1066,4 @@ public class CustomRecipes {
 		}
 	}
 }
+

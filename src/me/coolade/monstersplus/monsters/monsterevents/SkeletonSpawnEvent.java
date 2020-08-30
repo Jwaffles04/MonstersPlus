@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+@SuppressWarnings("deprecation")
 public class SkeletonSpawnEvent {
 	final static float DROP_CHANCE = 0.07F;
 	LivingEntity lent;
@@ -34,7 +35,7 @@ public class SkeletonSpawnEvent {
 		this(lent, MonsterList.generateMonster(EntityType.SKELETON, lent.getLocation().getBlock().getBiome()));
 	}
 
-	@SuppressWarnings("deprecation")
+
 	public void createMonster() {
 		if (mobName == null) {
 			return;
@@ -49,7 +50,7 @@ public class SkeletonSpawnEvent {
 
 		/** Skeleton Knight **/
 		if (mobName.equalsIgnoreCase("Skeleton Knight")) {
-			ee.setItemInHand(new ItemStack(Material.WOOD_SWORD));
+			ee.setItemInHand(new ItemStack(Material.WOODEN_SWORD));
 			ee.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
 		}
 		/** Skeleton Fighter **/
@@ -69,19 +70,19 @@ public class SkeletonSpawnEvent {
 			ee.setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
 			ee.setItemInHandDropChance(DROP_CHANCE);
 		} else if (mobName.equalsIgnoreCase("Cranial Basher")) {
-			ItemStack inhand = Tools.setItemDisplayName(new ItemStack(Material.SKULL_ITEM),
+			ItemStack inhand = Tools.setItemDisplayName(new ItemStack(Material.SKELETON_SKULL),
 					ChatColor.DARK_RED + "Scourge");
 			inhand.addUnsafeEnchantment(Enchantment.KNOCKBACK, 3);
 			ee.setItemInHand(inhand);
 			ee.setHelmet(new ItemStack(Material.IRON_HELMET));
-			ee.setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
+			ee.setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
 			ee.setItemInHandDropChance(DROP_CHANCE);
 		} else if (mobName.equalsIgnoreCase("Hot Bones")) {
 			ItemStack inhand = Tools.setItemDisplayName(new ItemStack(Material.BONE),
 					ChatColor.DARK_RED + "Zwei Bone of Ra");
 			inhand.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 3);
 			ee.setItemInHand(inhand);
-			ee.setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
+			ee.setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
 			ee.setItemInHandDropChance(DROP_CHANCE);
 			lent.addPotionEffect(
 					new PotionEffect(PotionEffectType.FIRE_RESISTANCE, MonsterListener.POTION_DURATION, 100));
@@ -117,8 +118,8 @@ public class SkeletonSpawnEvent {
 		else if (mobName.equalsIgnoreCase("Skeleton Champion")) {
 			ee.setItemInHand(new ItemStack(Material.IRON_SWORD));
 			ee.setHelmet(new ItemStack(Material.AIR));
-			ee.setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
-			ee.setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
+			ee.setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS));
+			ee.setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
 			ee.setBoots(new ItemStack(Material.AIR));
 		} else if (mobName.equalsIgnoreCase("Dazzler")) {
 			ItemStack bow = Tools.setItemDisplayName(new ItemStack(Material.BOW), ChatColor.DARK_GRAY + "Kridershot");
@@ -185,7 +186,7 @@ public class SkeletonSpawnEvent {
 			bow.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 1);
 			ee.setItemInHand(bow);
 			// Wither Skull
-			ee.setHelmet(new ItemStack(Material.SKULL_ITEM, 1, (short) 1));
+			ee.setHelmet(new ItemStack(Material.SKELETON_SKULL, 1, (short) 1));
 			ee.setItemInHandDropChance(DROP_CHANCE);
 		} else if (mobName.equalsIgnoreCase("Iced Sharpshooter")) {
 			ItemStack bow = new ItemStack(Material.BOW);
@@ -264,10 +265,10 @@ public class SkeletonSpawnEvent {
 			inhand.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 			inhand.addUnsafeEnchantment(Enchantment.DAMAGE_ARTHROPODS, 3);
 			ee.setItemInHand(inhand);
-			ee.setHelmet(new ItemStack(Material.GOLD_HELMET));
-			ee.setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
-			ee.setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
-			ee.setBoots(new ItemStack(Material.GOLD_BOOTS));
+			ee.setHelmet(new ItemStack(Material.GOLDEN_HELMET));
+			ee.setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS));
+			ee.setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
+			ee.setBoots(new ItemStack(Material.GOLDEN_BOOTS));
 			ee.setItemInHandDropChance(DROP_CHANCE);
 			lent.setFireTicks(MonsterListener.POTION_DURATION);
 		} else if (mobName.equalsIgnoreCase("Bad Blacksmith")) {
@@ -281,7 +282,7 @@ public class SkeletonSpawnEvent {
 			ee.setHelmet(new ItemStack(Material.AIR));
 			ee.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
 			ee.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-			ee.setBoots(new ItemStack(Material.GOLD_BOOTS));
+			ee.setBoots(new ItemStack(Material.GOLDEN_BOOTS));
 			ee.setItemInHandDropChance(DROP_CHANCE);
 		} else if (mobName.equalsIgnoreCase("Crazed Skeleton")) {
 			ItemStack inhand = Tools.setItemDisplayName(new ItemStack(Material.CACTUS),
@@ -304,7 +305,7 @@ public class SkeletonSpawnEvent {
 			inhand.addUnsafeEnchantment(Enchantment.DURABILITY, 2);
 			inhand.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
 			ee.setItemInHand(inhand);
-			ee.setHelmet(new ItemStack(Material.SKULL_ITEM, 1, (short) 3));
+			ee.setHelmet(new ItemStack(Material.SKELETON_SKULL, 1, (short) 3));
 			ee.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
 			ee.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
 			ee.setBoots(new ItemStack(Material.IRON_BOOTS));
@@ -320,7 +321,7 @@ public class SkeletonSpawnEvent {
 			ee.setHelmet(new ItemStack(Material.AIR));
 			ee.setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));
 			ee.setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
-			ee.setBoots(new ItemStack(Material.GOLD_BOOTS));
+			ee.setBoots(new ItemStack(Material.GOLDEN_BOOTS));
 			ee.setItemInHandDropChance(DROP_CHANCE);
 		}
 		/** Legolas LEGENDARY **/
@@ -350,7 +351,7 @@ public class SkeletonSpawnEvent {
 			ItemStack bow = new ItemStack(Material.BOW);
 			bow.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 80);
 
-			ItemStack helm = new ItemStack(Material.SKULL_ITEM, 1, (short) 1);
+			ItemStack helm = new ItemStack(Material.SKELETON_SKULL, 1, (short) 1);
 			ItemStack leg = new ItemStack(Material.DIAMOND_LEGGINGS);
 			ItemStack chest = new ItemStack(Material.DIAMOND_CHESTPLATE);
 			ItemStack boot = new ItemStack(Material.DIAMOND_BOOTS);

@@ -253,7 +253,7 @@ public class ArrowListener implements Listener {
 										&& MonstersPlus.isBuildLocation(shooter, tempBlock.getLocation())
 										&& world.getBlockAt(tempBlock.getLocation().add(0, -1, 0))
 												.getType() != Material.AIR) {
-									new PlaceAndCleanTask(Material.WEB, tempBlock.getLocation(), 0,
+									new PlaceAndCleanTask(Material.COBWEB, tempBlock.getLocation(), 0,
 											(int) (NETARROW_CLEANUP_SECONDS * 20));
 								}
 							}
@@ -495,7 +495,7 @@ public class ArrowListener implements Listener {
 						}
 					}
 					Block relBlock = hitBlock.getRelative((int) vals[0], (int) vals[1], (int) vals[2]);
-					if (relBlock.getType() == Material.AIR || relBlock.getType() == Material.LONG_GRASS) {
+					if (relBlock.getType() == Material.AIR || relBlock.getType() == Material.TALL_GRASS) {
 						relBlock.setType(Material.TORCH);
 						arrow.remove();
 						return;

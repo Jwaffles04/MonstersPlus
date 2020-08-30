@@ -3,7 +3,6 @@ package me.coolade.monstersplus.monsters;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Material;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
@@ -22,14 +21,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
+/*import org.bukkit.event.entity.EntityDamageByEntityEvent;*/
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityTameEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -132,7 +130,7 @@ public class MonsterListener implements Listener {
 			}
 		}
 	}
-
+	/*
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 		// If a human and monster attack then we need to update the
@@ -159,21 +157,21 @@ public class MonsterListener implements Listener {
 			MonsterList.updateMonsterMetaName(lentTarget);
 		}
 	}
-
+*/
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onCreeperExplode(EntityExplodeEvent event) {
 		new MonsterUpdater(event);
 	}
 
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onEntityDeath(EntityDeathEvent event) {
+/*	public void onEntityDeath(EntityDeathEvent event) {
 		new MonsterUpdater(event);
 		/**
 		 * If the one of the items that is being dropped has a custom name then
 		 * we want it to drop with full durability restored.
 		 */
-		Entity ent = event.getEntity();
+/*		Entity ent = event.getEntity();
 		if (ent instanceof LivingEntity && !(ent instanceof Player)) {
 			LivingEntity lent = (LivingEntity) ent;
 			if (MonsterList.isCustomMonster(lent) && (lent instanceof Zombie) || (lent instanceof Skeleton)) {
@@ -196,7 +194,8 @@ public class MonsterListener implements Listener {
 			}
 		}
 	}
-
+*/
+	@SuppressWarnings("deprecation")
 	private boolean modifyDropDurability(EntityDeathEvent event, ItemStack item, float dropChance) {
 		if (dropChance > 0F && dropChance != 18.5) // 18.5 is the default value
 		{

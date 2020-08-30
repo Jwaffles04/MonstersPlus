@@ -1,7 +1,5 @@
 package me.coolade.monstersplus.monsters;
 
-import java.util.HashSet;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -22,7 +20,6 @@ import me.coolade.monstersplus.monsters.monsterevents.ZombieSpawnEvent;
 public class MonsterSpawnCommand {
 	private final int MAXDISTANCE = 50;
 
-	@SuppressWarnings("deprecation")
 	public MonsterSpawnCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (!(sender instanceof Player) && args.length < 4) {
 			sender.sendMessage(ChatColor.RED + "Only players can use this command.");
@@ -60,7 +57,7 @@ public class MonsterSpawnCommand {
 				// Spawn the monster based on type.
 				Location loc = null;
 				if (sender instanceof Player) {
-					loc = ((Player) sender).getTargetBlock(new HashSet<Byte>(), MAXDISTANCE).getLocation();
+					loc = ((Player) sender).getTargetBlockExact(MAXDISTANCE).getLocation();
 				}
 				if (args.length > 3) {
 					try {

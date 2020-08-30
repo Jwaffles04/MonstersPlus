@@ -133,7 +133,7 @@ public class CustomEnchantment {
 				new int[] { 0, 2, 4 }, EnchantableItems.PICKAXES, new String[] { "None" },
 				"Gives a small chance to remove a large radius of Stone or Gravel whenever mining those blocks. (Pickaxes)"));
 
-		enchantmentList.add(new EnchantmentSet("Sheer Luck", 3, "Farmer", new int[] { 3, 8, 14 },
+		/*enchantmentList.add(new EnchantmentSet("Sheer Luck", 3, "Farmer", new int[] { 3, 8, 14 },
 				new int[] { 15, 10, 30 }, new int[] { 1, 2, 3 }, EnchantableItems.SHEARS, new String[] { "None" },
 				"Bonus chance to gain additional wool when shearing, Bonus chance to gain feathers, eggs, and leather when punching chickens and cows respectively (Shears)"));
 
@@ -157,7 +157,7 @@ public class CustomEnchantment {
 				new int[] { 15, 25, 20, 30, 30 }, new int[] { 0, 0, 2, 4, 6 }, EnchantableItems.HOES,
 				new String[] { "None" },
 				"Gives a chance to find random seeds while tilling soil (Your Mom, aka hoes)"));
-
+*/
 		enchantmentList.add(new EnchantmentSet("Puberty", 1, "Farmer", new int[] { 10 }, new int[] { 20 },
 				new int[] { 2 }, EnchantableItems.TOOLS, new String[] { "None" },
 				"Punch babies into adults and adults into babies (Tools)"));
@@ -245,6 +245,7 @@ public class CustomEnchantment {
 
 		// Check all the bukkit enchantments
 		for (int i = 0; i < conflicEnchs.length; i++) {
+			@SuppressWarnings("deprecation")
 			Enchantment ench = Enchantment.getByName(conflicEnchs[i]);
 			if (ench != null) {
 				if (item.containsEnchantment(ench)) {

@@ -1,7 +1,5 @@
 package me.coolade.monstersplus;
 
-import static com.sk89q.worldguard.bukkit.BukkitUtil.toVector;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -10,9 +8,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -31,18 +30,11 @@ import com.massivecraft.factions.entity.BoardColl;
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.MFlag;
 import com.massivecraft.massivecore.ps.PS;
-import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.flags.DefaultFlag;
-import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.managers.RegionManager;
-
 import me.coolade.jobsplus.ArrowListener;
 import me.coolade.jobsplus.BuilderCommand;
 import me.coolade.jobsplus.CustomRecipes;
 import me.coolade.jobsplus.JobsListener;
-import me.coolade.jobsplus.OreRadar;
 import me.coolade.jobsplus.PowerstoneCommand;
 import me.coolade.jobsplus.Tracker;
 import me.coolade.jobsplus.customenchanting.CustomEnchantCommand;
@@ -59,9 +51,9 @@ import net.coreprotect.CoreProtectAPI;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
-import net.minecraft.server.v1_10_R1.AttributeInstance;
-import net.minecraft.server.v1_10_R1.EntityInsentient;
-import net.minecraft.server.v1_10_R1.GenericAttributes;
+import net.minecraft.server.v1_16_R1.AttributeModifiable;
+import net.minecraft.server.v1_16_R1.EntityInsentient;
+import net.minecraft.server.v1_16_R1.GenericAttributes;
 
 public class MonstersPlus extends JavaPlugin {
 	public static WorldGuardPlugin worldGuard;
@@ -115,8 +107,8 @@ public class MonstersPlus extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (commandLabel.equalsIgnoreCase("jobenchant")) {
 			new EnchantCommand(sender, cmd, commandLabel, args);
-		} else if (commandLabel.equalsIgnoreCase("oreradar")) {
-			new OreRadar(sender, cmd, commandLabel, args);
+/*		} else if (commandLabel.equalsIgnoreCase("oreradar")) {
+			new OreRadar(sender, cmd, commandLabel, args);*/
 		} else if (commandLabel.equalsIgnoreCase("track")) {
 			new Tracker(sender, cmd, commandLabel, args);
 		} else if (commandLabel.equalsIgnoreCase("faq")) {
@@ -225,6 +217,7 @@ public class MonstersPlus extends JavaPlugin {
 		return loc;
 	}
 
+	//Suppress Warning Removed
 	public static void messageNearbyPlayers(Location loc, String message, int xRad, int yRad, int zRad) {
 		ArrayList<String> nearbyPlayers = getNearbyPlayers(loc, xRad, yRad, zRad);
 		for (int i = 0; i < nearbyPlayers.size(); i++) {
@@ -270,25 +263,26 @@ public class MonstersPlus extends JavaPlugin {
 	}
 
 	public static Double getSpeed(LivingEntity lent) {
-		AttributeInstance attributes = ((EntityInsentient) ((CraftLivingEntity) lent).getHandle())
+		AttributeInstance attributes = (AttributeInstance) ((EntityInsentient) ((CraftLivingEntity) lent).getHandle())
 				.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED);
 		return attributes.getValue();
 	}
 
 	public static void setSpeed(LivingEntity lent, double speed) {
-		AttributeInstance attributes = ((EntityInsentient) ((CraftLivingEntity) lent).getHandle())
+		AttributeModifiable attributes =((CraftLivingEntity) lent).getHandle()
 				.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED);
 		attributes.setValue(speed);
 	}
-
+//		AttributeInstance attributes = ((EntityInsentient) ((CraftLivingEntity) lent).getHandle())
+//	.getAttributeInstance(GenericAttributes.ATTACK_DAMAGE);
 	public static Double getAttack(LivingEntity lent) {
-		AttributeInstance attributes = ((EntityInsentient) ((CraftLivingEntity) lent).getHandle())
+		AttributeModifiable attributes =((CraftLivingEntity) lent).getHandle()
 				.getAttributeInstance(GenericAttributes.ATTACK_DAMAGE);
 		return attributes.getValue();
 	}
 
 	public static void setAttack(LivingEntity lent, double attack) {
-		AttributeInstance attributes = ((EntityInsentient) ((CraftLivingEntity) lent).getHandle())
+		AttributeModifiable attributes =((CraftLivingEntity) lent).getHandle()
 				.getAttributeInstance(GenericAttributes.ATTACK_DAMAGE);
 		attributes.setValue(attack);
 	}
@@ -316,14 +310,13 @@ public class MonstersPlus extends JavaPlugin {
 		return isSpawnableLocation(lent.getLocation());
 	}
 
-	@SuppressWarnings("deprecation")
 	public static boolean isSpawnableLocation(Location loc) {
 		String worldName = loc.getWorld().getName();
 		if (!worldName.equalsIgnoreCase("world")) {
 			return false;
 		}
 
-		// Worldguard protection
+		/* Worldguard protection
 		if (worldGuard != null) {
 			RegionManager rm = MonstersPlus.worldGuard.getRegionManager(loc.getWorld());
 			com.sk89q.worldedit.Vector vec = toVector(loc);
@@ -331,7 +324,7 @@ public class MonstersPlus extends JavaPlugin {
 			if (!set.allows(DefaultFlag.MOB_SPAWNING)) {
 				return false;
 			}
-		}
+		}*/
 
 		// Factions protection
 		if (Bukkit.getPluginManager().getPlugin("Factions") != null
@@ -345,12 +338,11 @@ public class MonstersPlus extends JavaPlugin {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static boolean isPVPLocation(Location loc) {
 		// if(!loc.getWorld().getName().toString().equalsIgnoreCase("world"))
 		// return false;
 
-		// Worldguard protection
+		/* Worldguard protection
 		if (worldGuard != null) {
 			RegionManager rm = MonstersPlus.worldGuard.getRegionManager(loc.getWorld());
 			com.sk89q.worldedit.Vector vec = toVector(loc);
@@ -358,7 +350,7 @@ public class MonstersPlus extends JavaPlugin {
 			if (!set.allows(DefaultFlag.PVP)) {
 				return false;
 			}
-		}
+		}*/
 
 		if (Bukkit.getPluginManager().getPlugin("Factions") != null
 				&& Bukkit.getPluginManager().getPlugin("mcore") != null) {
@@ -382,7 +374,7 @@ public class MonstersPlus extends JavaPlugin {
 			return true;
 		}
 
-		// Worldguard protection
+		/* Worldguard protection
 		if (worldGuard != null) {
 			RegionManager rm = MonstersPlus.worldGuard.getRegionManager(loc.getWorld());
 			com.sk89q.worldedit.Vector vec = toVector(loc);
@@ -391,7 +383,7 @@ public class MonstersPlus extends JavaPlugin {
 			if (!set.canBuild(lplayer)) {
 				return false;
 			}
-		}
+		}*/
 
 		// Factions protection
 		if (Bukkit.getPluginManager().getPlugin("Factions") != null
@@ -402,13 +394,13 @@ public class MonstersPlus extends JavaPlugin {
 		}
 		return true;
 	}
-
+/*
 	@SuppressWarnings("deprecation")
 	public static boolean isEnderpearlAllowed(Location loc, Player player) {
 		if (player.isOp()) {
 			return true;
 		}
-		// Worldguard protection
+	 	//Worldguard protection
 		if (worldGuard != null) {
 			RegionManager rm = MonstersPlus.worldGuard.getRegionManager(loc.getWorld());
 			com.sk89q.worldedit.Vector vec = toVector(loc);
@@ -440,7 +432,7 @@ public class MonstersPlus extends JavaPlugin {
 			return set.allows(flag);
 		}
 		return true;
-	}
+	}*/
 
 	public static boolean isTargetting(TargetReason reason) {
 		// Bukkit.broadcastMessage(reason.toString());
@@ -461,5 +453,15 @@ public class MonstersPlus extends JavaPlugin {
 			Vector normVec = destinationVec.normalize();
 			ent.setVelocity(playerVec.add(normVec.multiply(power * -1)));
 		}
+	}
+
+	public static boolean isFlagAllowed(Location loc, int aLL) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean isEnderpearlAllowed(Location location) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

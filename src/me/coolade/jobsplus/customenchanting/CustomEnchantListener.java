@@ -39,6 +39,7 @@ import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 import org.bukkit.material.Wool;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -48,6 +49,7 @@ import me.coolade.jobsplus.customenchanting.CustomEnchantment.EnchantmentSetOnIt
 import me.coolade.monstersplus.MonstersPlus;
 import me.coolade.monstersplus.Tools;
 
+@SuppressWarnings("deprecation")
 public class CustomEnchantListener implements Listener {
 	private static final double ICE_ASPECT_PR = 2.0;
 	private static final double ICE_SHOT_PR = 2.5;
@@ -154,7 +156,6 @@ public class CustomEnchantListener implements Listener {
 
 		EntityEquipment equip = lentDam.getEquipment();
 		ItemStack[] targetArmor = lentTar.getEquipment().getArmorContents();
-		@SuppressWarnings("deprecation")
 		ItemStack inhand = equip.getItemInHand();
 		List<EnchantmentSetOnItem> inhandEnchs = custEnch.getCustomEnchantments(inhand);
 		List<EnchantmentSetOnItem> tarArmorEnchs = custEnch.combineSimilarEnchantments(targetArmor);
@@ -358,7 +359,6 @@ public class CustomEnchantListener implements Listener {
 		Entity ent = event.getCaught();
 		Player player = event.getPlayer();
 
-		@SuppressWarnings("deprecation")
 		ItemStack inhand = player.getInventory().getItemInHand();
 		List<EnchantmentSetOnItem> inhandEnchs = custEnch.getCustomEnchantments(inhand);
 
@@ -403,7 +403,6 @@ public class CustomEnchantListener implements Listener {
 		World world = block.getWorld();
 		Player player = event.getPlayer();
 
-		@SuppressWarnings("deprecation")
 		ItemStack inhand = player.getInventory().getItemInHand();
 		List<EnchantmentSetOnItem> inhandEnchs = custEnch.getCustomEnchantments(inhand);
 		if (custEnch.hasCustomEnchantmentType(inhandEnchs, "Molten Touch")) {
@@ -416,24 +415,24 @@ public class CustomEnchantListener implements Listener {
 			} else if (block.getType() == Material.GOLD_ORE) {
 				Tools.removeNearbyEntityDelay(loc, Material.GOLD_ORE, 1.3, 1L);
 				world.dropItemNaturally(loc, new ItemStack(Material.GOLD_INGOT, 1));
-			} else if (block.getType() == Material.LOG) {
-				Tools.removeNearbyEntityDelay(loc, Material.LOG, 1.3, 1L);
-				world.dropItemNaturally(loc, new ItemStack(Material.COAL, 1, (short) 1));
+			} else if (block.getType() == Material.OAK_LOG) {
+				Tools.removeNearbyEntityDelay(loc, Material.OAK_LOG, 1.3, 1L);
+				world.dropItemNaturally(loc, new ItemStack(Material.COAL, 1));
 			} else if (block.getType() == Material.COBBLESTONE) {
 				Tools.removeNearbyEntityDelay(loc, Material.COBBLESTONE, 1.3, 1L);
 				world.dropItemNaturally(loc, new ItemStack(Material.STONE, 1));
 			} else if (block.getType() == Material.MOSSY_COBBLESTONE) {
 				Tools.removeNearbyEntityDelay(loc, Material.MOSSY_COBBLESTONE, 1.3, 1L);
-				world.dropItemNaturally(loc, new ItemStack(Material.SMOOTH_BRICK, 1, (short) 1));
+				world.dropItemNaturally(loc, new ItemStack(Material.STONE_BRICKS, 1));
 			} else if (block.getType() == Material.SAND) {
 				Tools.removeNearbyEntityDelay(loc, Material.SAND, 1.3, 1L);
 				world.dropItemNaturally(loc, new ItemStack(Material.GLASS));
 			} else if (block.getType() == Material.CLAY) {
 				Tools.removeNearbyEntityDelay(loc, Material.CLAY_BALL, 1.3, 1L);
-				world.dropItemNaturally(loc, new ItemStack(Material.HARD_CLAY));
+				world.dropItemNaturally(loc, new ItemStack(Material.CLAY));
 			} else if (block.getType() == Material.CACTUS) {
 				Tools.removeNearbyEntityDelay(loc, Material.CACTUS, 1.3, 1L);
-				world.dropItemNaturally(loc, new ItemStack(Material.INK_SACK, 1, (short) 2));
+				world.dropItemNaturally(loc, new ItemStack(Material.INK_SAC,2));
 			}
 		}
 		if (custEnch.hasCustomEnchantmentType(inhandEnchs, "Lucky Break")) {
@@ -493,23 +492,20 @@ public class CustomEnchantListener implements Listener {
 		}
 
 		Player player = event.getPlayer();
-		@SuppressWarnings("deprecation")
 		ItemStack inhand = player.getInventory().getItemInHand();
 		List<EnchantmentSetOnItem> inhandEnchs = custEnch.getCustomEnchantments(inhand);
 		if (custEnch.hasCustomEnchantmentType(inhandEnchs, "Blackhole")) {
 			event.setItemStack(inhand);
 			event.setCancelled(true);
-			@SuppressWarnings("deprecation")
-			Block block = player.getTargetBlock(new HashSet<Byte>(), 5);
-			if (block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER
-					|| block.getType() == Material.LAVA || block.getType() == Material.STATIONARY_LAVA) {
+			Block block = player.getTargetBlock(new HashSet<Material>(), 5);		//Originally new HasHSet<Byte>(), 5
+			if (block.getType() == Material.WATER || block.getType() == Material.WATER_BUCKET
+					|| block.getType() == Material.LAVA || block.getType() == Material.LAVA_BUCKET) {
 				block.setType(Material.AIR);
 			}
 			final ItemStack fstack = inhand;
 			final Player fplayer = player;
 			MonstersPlus.plugin.getServer().getScheduler().scheduleSyncDelayedTask(MonstersPlus.plugin, new Runnable() {
 				@Override
-				@SuppressWarnings("deprecation")
 				public void run() {
 					fplayer.setItemInHand(fstack);
 				}
@@ -525,7 +521,6 @@ public class CustomEnchantListener implements Listener {
 		}
 
 		Player player = event.getPlayer();
-		@SuppressWarnings("deprecation")
 		ItemStack inhand = player.getInventory().getItemInHand();
 		List<EnchantmentSetOnItem> inhandEnchs = custEnch.getCustomEnchantments(inhand);
 		if (custEnch.hasCustomEnchantmentType(inhandEnchs, "Flow")) {
@@ -546,7 +541,6 @@ public class CustomEnchantListener implements Listener {
 			return;
 		}
 
-		@SuppressWarnings("deprecation")
 		ItemStack inhand = player.getInventory().getItemInHand();
 		List<EnchantmentSetOnItem> inhandEnchs = custEnch.getCustomEnchantments(inhand);
 		Sheep sheep = (Sheep) ent;
@@ -582,7 +576,6 @@ public class CustomEnchantListener implements Listener {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if (event.isCancelled()) {
@@ -602,10 +595,10 @@ public class CustomEnchantListener implements Listener {
 					for (int z = radius * -1; z < radius; z++) {
 						Block tblock = world.getBlockAt(block.getLocation().add(x, 0, z));
 						if (tblock.getType() == Material.DIRT || tblock.getType() == Material.GRASS) {
-							if (tblock.getType() != Material.SOIL
+							if (tblock.getType() != Material.FARMLAND
 									&& MonstersPlus.isBuildLocation(player, tblock.getLocation())
 									&& !(x == 0 && z == 0)) {
-								tblock.setType(Material.SOIL);
+								tblock.setType(Material.FARMLAND);
 								if (Tools.randomChance(TILLING_DURAB_PERCENTAGE)) {
 									inhand.setDurability((short) (inhand.getDurability() + 1));
 								}
@@ -636,18 +629,18 @@ public class CustomEnchantListener implements Listener {
 				for (int x = radius * -1; x < radius; x++) {
 					for (int z = radius * -1; z < radius; z++) {
 						Block tblock = world.getBlockAt(block.getLocation().add(x, 0, z));
-						if (tblock.getType() == Material.SOIL
+						if (tblock.getType() == Material.FARMLAND
 								&& MonstersPlus.isBuildLocation(player, tblock.getLocation())) {
-							tblock.setData((byte) 7);
+							((MaterialData) tblock).setData((byte) 7);
 						}
 					}
 				}
 			}
 			if (custEnch.hasCustomEnchantmentType(inhandEnchs, "Papercut")
 					&& event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-				if (block.getType() == Material.WEB && MonstersPlus.isBuildLocation(player, block.getLocation())) {
+				if (block.getType() == Material.COBWEB && MonstersPlus.isBuildLocation(player, block.getLocation())) {
 					block.setType(Material.AIR);
-					world.dropItemNaturally(block.getLocation(), new ItemStack(Material.WEB, 1));
+					world.dropItemNaturally(block.getLocation(), new ItemStack(Material.COBWEB, 1));
 					inhand.setDurability((short) (inhand.getDurability() + PAPERCUT_DURAB_AMOUNT));
 				} else if (block.getType() == Material.DEAD_BUSH
 						&& MonstersPlus.isBuildLocation(player, block.getLocation())) {

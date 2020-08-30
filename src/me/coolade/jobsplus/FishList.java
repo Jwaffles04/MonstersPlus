@@ -23,7 +23,7 @@ public class FishList {
 		private static final long serialVersionUID = 1L;
 
 		{
-			add(new FishItemSet(Material.MOB_SPAWNER, 0.3, 1, 3, 2));
+			add(new FishItemSet(Material.SPAWNER, 0.3, 1, 3, 2));
 			add(new FishItemSet(Material.EMERALD, 0.3, 1, 3.0, 5));
 			add(new FishItemSet(Material.GOLDEN_APPLE, (short) 0, 0.9, 1, 4.5, 5));
 			add(new FishItemSet(Material.DIAMOND, 1.5, 1, 6.0, 7));
@@ -37,7 +37,7 @@ public class FishList {
 			add(new FishItemSet(Material.MAGMA_CREAM, 1.0, 1, 4.0, 8));
 			add(new FishItemSet(Material.BLAZE_ROD, 1.0, 1, 4.0, 8));
 			add(new FishItemSet(Material.ANVIL, 1.0, 1, 2.0, 3));
-			add(new FishItemSet(Material.EXP_BOTTLE, 2.0, 1, 5.0, 55));
+			add(new FishItemSet(Material.EXPERIENCE_BOTTLE, 2.0, 1, 5.0, 55));
 			add(new FishItemSet(Material.GOLD_NUGGET, 2.5, 5, 6.0, 27));
 			add(new FishItemSet(Material.NETHER_STAR, 0.5, 1, 3.0, 1));
 		}
@@ -60,7 +60,7 @@ public class FishList {
 			add(new FishItemSet(Material.REDSTONE, 3.0, 5, 5.0, 38));
 			add(new FishItemSet(Material.LEATHER_CHESTPLATE, 3.0, 1, 0.5, 3));
 			add(new FishItemSet(Material.LEATHER_LEGGINGS, 3.0, 1, 0.5, 3));
-			add(new FishItemSet(Material.GOLD_AXE, 1.0, 1, 2.0, 3));
+			add(new FishItemSet(Material.GOLDEN_AXE, 1.0, 1, 2.0, 3));
 			add(new FishItemSet(Material.FERMENTED_SPIDER_EYE, 1.0, 1, 3.5, 8));
 		}
 	};
@@ -83,13 +83,14 @@ public class FishList {
 			add(new FishItemSet(Material.LEATHER, 4.0, 1, 4.0, 22));
 			add(new FishItemSet(Material.ARROW, 3.0, 5, 1.0, 65));
 			add(new FishItemSet(Material.APPLE, 2.0, 1, 5.0, 10));
-			add(new FishItemSet(Material.CARROT_ITEM, 4.0, 1, 2.0, 18));
+			add(new FishItemSet(Material.CARROT, 4.0, 1, 2.0, 18));
 			add(new FishItemSet(Material.MELON, 2.0, 1, 1.0, 25));
-			add(new FishItemSet(Material.RAW_BEEF, 4.0, 1, 2.0, 20));
-			add(new FishItemSet(Material.RAW_CHICKEN, 4.0, 1, 2.0, 20));
+			add(new FishItemSet(Material.BEEF, 4.0, 1, 2.0, 20));
+			add(new FishItemSet(Material.CHICKEN, 4.0, 1, 2.0, 20));
 		}
 	};
 
+	@SuppressWarnings("deprecation")
 	public static void generateFishedItem(ItemStack istack, int currentLevel) {
 		/*
 		 * This method will go through a cloned/shuffed list of fishable items
@@ -147,7 +148,7 @@ public class FishList {
 				istack.setItemMeta(tempStack.getItemMeta());
 				istack.setType(tempStack.getType());
 
-				if (istack.getType() == Material.MOB_SPAWNER) {
+				if (istack.getType() == Material.SPAWNER) {
 					istack.setDurability((short) 54);
 					istack.setDurability(getMobSpawnerDur());
 				}

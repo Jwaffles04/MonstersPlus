@@ -9,8 +9,6 @@ import me.coolade.jobsplus.CustomRecipes.RecipeSet;
 import me.coolade.jobsplus.FishList;
 import me.coolade.jobsplus.FishList.FishItemSet;
 import me.coolade.jobsplus.JobsListener;
-import me.coolade.jobsplus.OreRadar;
-import me.coolade.jobsplus.OreRadar.OreSet;
 import me.coolade.jobsplus.Tracker;
 import me.coolade.jobsplus.Tracker.TrackSet;
 import me.coolade.jobsplus.enchanter.EnchantList;
@@ -23,8 +21,8 @@ import me.coolade.monstersplus.monsters.MonsterList;
 public class FAQ {
 
 	public static String[] topics = { "Money", "Market", "Monsters", "Quests", "Jobs", "Survivalist", "Miner",
-			"Warrior", "Fisherman", "WitchDoctor", "Farmer", "Enchanter", "Builder", "Blacksmith", "Disguise",
-			"Customarrows", "Oreradar", "Tracking", "Brewing", "Fishing", "Jobenchant", "Customenchant", "ArrowRecipes",
+			"Warrior", "Fisherman", "WitchDoctor", "Farmer", "Enchanter", "Builder", "Blacksmith", "Tamer", "Disguise",
+			"Customarrows", "HammerAndExcavator", "Tracking", "Brewing", "Fishing", "Jobenchant", "Customenchant", "ArrowRecipes",
 			"Farmer Recipes", "Builder Recipes", "Trophy", "Powerstones", "ExpTrading", "Bombs", "Enderdragonspawning",
 			"Challenge", "Ranks", "Minigames" };
 
@@ -39,7 +37,7 @@ public class FAQ {
 						+ "Each player may have up to 3 jobs. Certain jobs allow players to get custom enchantments and disguises. "
 						+ "To learn more about jobs type: " + ChatColor.RED
 						+ "/jobs, /jobs help, /jobs browse, /jobs join, /faq jobs explist"
-						+ "/faq survivalist, /faq warrior, /faq miner, /faq fisherman, /faq witchdoctor,"
+						+ "/faq survivalist, /faq warrior, /faq miner, /faq Tamer, /faq fisherman, /faq witchdoctor,"
 						+ "/faq farmer, /faq enchanter, /faq builder, /faq blacksmith, /faq customenchant, /faq disguise, /faq bombs");
 			} else if (args[0].equalsIgnoreCase("jobs") && args.length > 1 && args[1].equalsIgnoreCase("explist")) {
 				sender.sendMessage(ChatColor.GOLD + "Jobs Explist: ");
@@ -60,8 +58,13 @@ public class FAQ {
 			} else if (args[0].equalsIgnoreCase("Miner")) {
 				sender.sendMessage(ChatColor.GOLD + "Miner: " + ChatColor.WHITE
 						+ "The Miner receives money by collecting precious ore such as diamond. " + ChatColor.AQUA
-						+ "Unique Abilities: Ore Radar. " + ChatColor.WHITE + "To learn more type: " + ChatColor.RED
-						+ "/jobs info miner, /faq oreradar");
+						+ "Unique Abilities: Hammer and Excavator. " + ChatColor.WHITE + "To learn more type: " + ChatColor.RED
+						+ "/jobs info miner, /faq HammerAndExcavator");
+			} else if (args[0].equalsIgnoreCase("Tamer")) {
+				sender.sendMessage(ChatColor.GOLD + "Tamer: " + ChatColor.WHITE
+						+ "The Tamer receives money by taming animals. " + ChatColor.AQUA
+						+ "Unique Abilities: Mob Pets. " + ChatColor.WHITE + "To learn more type: " + ChatColor.RED
+						+ "/jobs info Tamer, /mypet");
 			} else if (args[0].equalsIgnoreCase("Warrior")) {
 				sender.sendMessage(ChatColor.GOLD + "Warrior: " + ChatColor.WHITE
 						+ "The Warrior receives money for all monsters and animals. " + ChatColor.AQUA
@@ -82,10 +85,9 @@ public class FAQ {
 						+ "The Witchdoctor receives money and experience for brewing potions and crafting fireworks. "
 						+ "Witchdoctors unlock a special brewing technique that allows them the ability to brew unique "
 						+ "potions such as blindness, wither, confusion, jump, and dig speed. High level Witchdoctors "
-						+ "unlock the ability to amplify, extend, and stir potions. Stiring the potion allows for multiple "
-						+ "potion effects to be added onto a single potion. " + ChatColor.AQUA
+						+ "unlock the ability to create giant barrels and unlabel bottles. "+ ChatColor.AQUA
 						+ "Unique Abilities: Custom Brewing " + ChatColor.WHITE + "To learn more type: " + ChatColor.RED
-						+ "/jobs info witchdoctor, /faq brewing, /faq brewing process, /faq brewing list");
+						+ "/jobs info witchdoctor, /faq brewing");
 			} else if (args[0].equalsIgnoreCase("Farmer") && args.length == 1) {
 				sender.sendMessage(ChatColor.GOLD + "Farmer: " + ChatColor.WHITE
 						+ "Farmers receive money by creating farms to harvest crops. "
@@ -139,21 +141,20 @@ public class FAQ {
 				}
 				sender.sendMessage(
 						ChatColor.WHITE + "To find the recipes type: " + ChatColor.RED + "/faq arrowrecipes");
-			} else if (args[0].equalsIgnoreCase("OreRadar") && args.length == 1) {
-				sender.sendMessage(ChatColor.GOLD + "Ore Radar: " + ChatColor.WHITE
-						+ "Oreradar is an ability that helps a miner locate specific ore. "
-						+ "By typing /oreradar <ore>, the Oreradar will begin searching nearby blocks to "
-						+ "determine if they are the correct type. If it finds the correct ore it will automatically "
-						+ "turn the miner towards the direction of the ore. The oreradar scans the nearby area once "
-						+ "every 30 seconds, continues for " + OreRadar.MINUTE + " minutes, and has a cooldown of "
-						+ OreRadar.COOLDOWN_MINUTE + " minutes. " + ChatColor.GOLD + "To display the ore levels type: "
-						+ ChatColor.RED + "/faq oreradar levels");
-			} else if (args[0].equalsIgnoreCase("OreRadar") && args.length > 1 && args[1].equalsIgnoreCase("levels")) {
+			} else if (args[0].equalsIgnoreCase("HammerAndExcavator") && args.length == 1) {
+				sender.sendMessage(ChatColor.GOLD + "Hammer and Excavator: " + ChatColor.WHITE
+						+ "Hammer and the excavator are upgraded versions of the normal pickaxe and shovel."
+						+ "By surrounding a pickaxe or shovel with the corresponding material "
+						+ "you will create the custom items. When mining or shoveling it will mine a 3x3 area."
+						+ "These items are enchantable as well but you cannot combine them with normal items."
+						+ "At level 5 you will be able to create the stone version, at level 10 the gold versions, "
+						+ "at level 15 the iron versions, and at level 25 the diamond versions.");
+			/*} else if (args[0].equalsIgnoreCase("OreRadar") && args.length > 1 && args[1].equalsIgnoreCase("levels")) {
 				sender.sendMessage(ChatColor.GOLD + "Ore Radar Levels: ");
 				for (OreSet os : OreRadar.oreSets) {
 					sender.sendMessage(ChatColor.AQUA + os.getMat().toString() + ChatColor.WHITE + ": Miner level "
 							+ os.getLevel() + " Scan Radius: " + os.getRadius());
-				}
+				}*/
 			} else if (args[0].equalsIgnoreCase("tracking") && args.length == 1) {
 				sender.sendMessage(ChatColor.GOLD + "Tracking: " + ChatColor.WHITE
 						+ "Tracking is an ability given to warriors and farmers to help them locate specific "
@@ -183,16 +184,12 @@ public class FAQ {
 			} else if (args[0].equalsIgnoreCase("brewing") && args.length == 1) {
 				sender.sendMessage(ChatColor.GOLD + "Brewing: " + ChatColor.WHITE
 						+ "Custom Brewing is an ability only available to Witchdoctors, which allows them "
-						+ "to create fully unique potions. As Witchdoctors gain levels they unlock the option "
-						+ "to stir the potion which allows for multiple potion effects on a single potion. "
-						+ "To utilize the custom brewing process, a Witchdoctor must be level 2 and have the following: "
-						+ "A netherwart, cauldron, water bucket, and an effect ingredient. (Optional) Amplify Ingredient, "
-						+ "Time extention ingredient, Splash Ingredient, and a Bone for Stiring. "
-						+ "Each brewing process yields 3 potions, and adding multiple effect ingredients will not stack on the potion "
-						+ "unless used with stiring/amplify. While custom brewing, Witchdoctors gain "
-						+ BrewingListener.INGREDIENT_EXP + " per ingredient added into the cauldron. " + ChatColor.GOLD
-						+ "To display the Brewing process and ingredient list type: " + ChatColor.RED
-						+ "/faq brewing process, /faq brewing list");
+						+ "to create a variety of alchohol and other special items. As Witchdoctors gain levels they unlock the option "
+						+ "to create barrels and cauldrons. To create them type /warp jobs to learn them along with other job specific things. "
+						+ "To utilize the custom brewing process, a Witchdoctor must be level 5 and have the following: "
+						+ "Ingredient(s), a clock, glass bottle, and patience. "
+						+ "There are many unique recipes and many give benefits other than being drunk. "
+						+ "A lot of experimentation is needed so try everything, its almost limitless! ");
 			} else if (args[0].equalsIgnoreCase("brewing") && args.length > 1 && args[1].equalsIgnoreCase("process")) {
 				sender.sendMessage(ChatColor.GOLD + "Brewing Process: " + ChatColor.WHITE
 						+ "1. Find a cauldron and fill it with water. "
@@ -382,7 +379,7 @@ public class FAQ {
 				sender.sendMessage(ChatColor.AQUA + "7. Mobarena. : " + ChatColor.WHITE
 						+ "Kill monsters and collect items in the Mobarena (/warp mobarena), this works best if you are a Warrior or Survivalist (/faq jobs).");
 				sender.sendMessage(ChatColor.AQUA + "8. Voting. : " + ChatColor.WHITE
-						+ "Gain $50 for every server vote, go to www.bendcraft.enjin.com (lower left hand corner). If you are cracked you won't be able to vote on all the links.");
+						+ "Gain $25 for every server vote, go to www.bcu.enjin.com (lower left hand corner). If you are cracked you won't be able to vote on all the links.");
 
 			} else if (args[0].equalsIgnoreCase("market") && args.length == 1) {
 				sender.sendMessage(ChatColor.GOLD + "Market: " + ChatColor.WHITE

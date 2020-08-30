@@ -129,8 +129,8 @@ public class CustomCauldron {
 		}
 		if (effects.size() > 0) {
 			Random random = new Random();
-			Potion potion = new Potion(random.nextInt(9) + 1);
-
+			Potion potion = new Potion(null, random.nextInt(9) + 1);
+//added null
 			potion.setSplash(splash);
 			ItemStack itemPotion = potion.toItemStack(1);
 

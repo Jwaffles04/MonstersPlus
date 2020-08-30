@@ -13,7 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_10_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -44,8 +44,8 @@ import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.MPlayer;
 import com.massivecraft.massivecore.ps.PS;
 
-import net.minecraft.server.v1_10_R1.NBTTagCompound;
-import net.minecraft.server.v1_10_R1.NBTTagList;
+import net.minecraft.server.v1_16_R1.NBTTagCompound;
+import net.minecraft.server.v1_16_R1.NBTTagList;
 
 public class Tools {
 	private Tools() {
@@ -491,7 +491,7 @@ public class Tools {
 	}
 
 	public static ItemStack addGlow(ItemStack item) {
-		net.minecraft.server.v1_10_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		net.minecraft.server.v1_16_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound tag = null;
 		if (!nmsStack.hasTag()) {
 			tag = new NBTTagCompound();
@@ -506,6 +506,7 @@ public class Tools {
 		return CraftItemStack.asCraftMirror(nmsStack);
 	}
 
+	@SuppressWarnings("deprecation")
 	public static ItemStack silkTouchItem(ItemStack item) {
 		Material mat = item.getType();
 		if (mat.equals(Material.COAL)) {
@@ -515,7 +516,7 @@ public class Tools {
 		} else if (mat.equals(Material.EMERALD)) {
 			item.setType(Material.EMERALD_ORE);
 		} else if (mat.equals(Material.QUARTZ)) {
-			item.setType(Material.QUARTZ_ORE);
+			item.setType(Material.NETHER_QUARTZ_ORE);
 		} else if (mat.equals(Material.DIRT)) {
 			item.setType(Material.GRASS);
 		} else if (mat.equals(Material.COBBLESTONE)) {
@@ -523,7 +524,7 @@ public class Tools {
 		} else if (mat.equals(Material.REDSTONE)) {
 			item.setType(Material.REDSTONE_ORE);
 			item.setAmount(item.getAmount() / 6);
-		} else if (mat.equals(Material.INK_SACK) && item.getDurability() == (short) 4) {
+		} else if (mat.equals(Material.INK_SAC) && item.getDurability() == (short) 4) {
 			item.setType(Material.LAPIS_ORE);
 			item.setAmount(item.getAmount() / 6);
 		}
@@ -533,14 +534,14 @@ public class Tools {
 
 	public static ItemStack cookItem(ItemStack item) {
 		Material mat = item.getType();
-		if (mat.equals(Material.RAW_FISH)) {
-			item.setType(Material.COOKED_FISH);
-		} else if (mat.equals(Material.RAW_BEEF)) {
+		if (mat.equals(Material.COD)) {
+			item.setType(Material.COOKED_COD);
+		} else if (mat.equals(Material.BEEF)) {
 			item.setType(Material.COOKED_BEEF);
-		} else if (mat.equals(Material.RAW_CHICKEN)) {
+		} else if (mat.equals(Material.CHICKEN)) {
 			item.setType(Material.COOKED_CHICKEN);
-		} else if (mat.equals(Material.PORK)) {
-			item.setType(Material.GRILLED_PORK);
+		} else if (mat.equals(Material.PORKCHOP)) {
+			item.setType(Material.COOKED_PORKCHOP);
 		} else if (mat.equals(Material.IRON_ORE)) {
 			item.setType(Material.IRON_INGOT);
 		} else if (mat.equals(Material.GOLD_INGOT)) {
@@ -604,6 +605,7 @@ public class Tools {
 	}
 
 	public static boolean inFactionTerritory(String playerName) {
+		//@SuppressWarnings("deprecation") Removed
 		Player player = Bukkit.getPlayer(playerName);
 		Faction areaFaction = BoardColl.get().getFactionAt(PS.valueOf(player.getLocation()));
 		MPlayer mplayer = MPlayer.get(player);
@@ -688,12 +690,12 @@ public class Tools {
 		return (new Vector(x * cos + z * (-sin), 0.0, x * sin + z * cos)).normalize();
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void damageEntity(LivingEntity damager, LivingEntity target, double damage) {
 		target.damage(damage);
 		target.setLastDamageCause(new EntityDamageByEntityEvent(damager, target, DamageCause.CUSTOM, damage));
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void damageWithoutArmorDamage(LivingEntity damager, LivingEntity target, double damage) {
 		try {
 			short durHelm = 0, durChest = 0, durLeg = 0, durBoot = 0;
@@ -755,7 +757,7 @@ public class Tools {
 
 	public static void dropRandomSeed(Location loc) {
 		Random random = new Random();
-		Material[] mats = new Material[] { Material.SEEDS, Material.MELON_SEEDS, Material.CARROT, Material.POTATO,
+		Material[] mats = new Material[] { Material.WHEAT_SEEDS, Material.MELON_SEEDS, Material.CARROT, Material.POTATO,
 				Material.PUMPKIN_SEEDS };
 		ItemStack istack = new ItemStack(mats[random.nextInt(mats.length)]);
 		loc.getWorld().dropItemNaturally(loc, istack);

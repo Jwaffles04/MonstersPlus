@@ -42,7 +42,7 @@ public class Tracker {
 			add(new TrackSet(EntityType.SLIME, WAR, 12, MEDIUM_RADIUS));
 			add(new TrackSet(EntityType.CAVE_SPIDER, WAR, 14, SMALL_RADIUS));
 
-			add(new TrackSet(EntityType.PIG_ZOMBIE, WAR, 4, SMALL_RADIUS));
+			add(new TrackSet(EntityType.PIGLIN, WAR, 4, SMALL_RADIUS));
 			add(new TrackSet(EntityType.GHAST, WAR, 6, SMALL_RADIUS));
 			add(new TrackSet(EntityType.BLAZE, WAR, 11, SMALL_RADIUS));
 			add(new TrackSet(EntityType.MAGMA_CUBE, WAR, 13, MEDIUM_RADIUS));
@@ -175,7 +175,7 @@ public class Tracker {
 		if (s.contains("ZOM") && !s.contains("PIG"))
 			return EntityType.ZOMBIE;
 		else if ((s.contains("ZOM") && s.contains("PIG")) || s.contains("PIGM"))
-			return EntityType.PIG_ZOMBIE;
+			return EntityType.PIGLIN;
 		else if (s.contains("SKE"))
 			return EntityType.SKELETON;
 		else if (s.contains("CREE"))

@@ -166,6 +166,7 @@ public class CustomItems {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static ItemStack createCustomItem(String name, int amount) {
 		CustomItemSet cis = getCustomItem(name);
 		if (cis != null) {

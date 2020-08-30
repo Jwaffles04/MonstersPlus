@@ -15,7 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftFallingSand;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftFallingBlock;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.EnderDragon;
@@ -28,8 +28,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -61,8 +59,7 @@ import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
-import com.sk89q.worldguard.protection.flags.DefaultFlag;
-
+import com.sk89q.worldedit.util.Direction.Flag;
 import me.coolade.jobsplus.CustomRecipes.RecipeSet;
 import me.coolade.jobsplus.customitems.CustomItems;
 import me.coolade.monstersplus.Cooldown;
@@ -266,6 +263,7 @@ public class JobsListener implements Listener {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onSpawnerClick(final InventoryClickEvent event) {
 		/**
@@ -282,7 +280,7 @@ public class JobsListener implements Listener {
 		}
 
 		ItemStack item = event.getCurrentItem();
-		if (item != null && item.getType() == Material.MOB_SPAWNER && item.getDurability() == (short) 0) {
+		if (item != null && item.getType() == Material.SPAWNER && item.getDurability() == (short) 0) {
 			item.setDurability((short) 54);
 		}
 	}
@@ -475,7 +473,7 @@ public class JobsListener implements Listener {
 		}
 
 		Block block = event.getClickedBlock();
-		if (block.getType() != Material.ENCHANTMENT_TABLE) {
+		if (block.getType() != Material.ENCHANTING_TABLE) {
 			return;
 		}
 		event.setCancelled(true);
@@ -605,7 +603,7 @@ public class JobsListener implements Listener {
 		Player player = Bukkit.getPlayer(pair.getSecond());
 		String itemName = pair.getFirst();
 		eggMap.remove(entity.getEntityId());
-		if ((!MonstersPlus.isPVPLocation(loc) || !MonstersPlus.isFlagAllowed(loc, DefaultFlag.USE)) && !player.isOp()) {
+		if ((!MonstersPlus.isPVPLocation(loc) || !MonstersPlus.isFlagAllowed(loc, Flag.ALL)) && !player.isOp()) {
 			return;
 		}
 
@@ -621,12 +619,12 @@ public class JobsListener implements Listener {
 			for (LivingEntity lent : lEntities) {
 				Tools.burnEntity(lent, 8 * 20, 100);
 			}
-			LivingEntity lent = (LivingEntity) loc.getWorld().spawnEntity(loc, EntityType.PIG_ZOMBIE);
+			LivingEntity lent = (LivingEntity) loc.getWorld().spawnEntity(loc, EntityType.PIGLIN);
 			EntityEquipment ee = lent.getEquipment();
 			ee.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
 			ee.setArmorContents(
-					new ItemStack[] { new ItemStack(Material.GOLD_HELMET), new ItemStack(Material.GOLD_CHESTPLATE),
-							new ItemStack(Material.GOLD_LEGGINGS), new ItemStack(Material.GOLD_BOOTS) });
+					new ItemStack[] { new ItemStack(Material.GOLDEN_HELMET), new ItemStack(Material.GOLDEN_CHESTPLATE),
+							new ItemStack(Material.GOLDEN_LEGGINGS), new ItemStack(Material.GOLDEN_BOOTS) });
 			ee.setItemInHandDropChance(0F);
 			ee.setHelmetDropChance(0F);
 			ee.setChestplateDropChance(0F);
@@ -645,7 +643,6 @@ public class JobsListener implements Listener {
 			}
 			for (int i = 0; i < 3; i++) {
 				LivingEntity lent = (LivingEntity) loc.getWorld().spawnEntity(loc, EntityType.SKELETON);
-				((Skeleton) lent).setSkeletonType(SkeletonType.WITHER);
 				EntityEquipment ee = lent.getEquipment();
 				ee.setItemInHand(new ItemStack(Material.BOW));
 				ee.setItemInHandDropChance(0F);
@@ -699,7 +696,7 @@ public class JobsListener implements Listener {
 								(byte) 1);
 						fblock.setFallDistance(50F);
 						fblock.setDropItem(false);
-						((CraftFallingSand) fblock).getHandle().a(true);
+						((CraftFallingBlock) fblock).getHandle().a(true);
 						anvilList.add(fblock.getEntityId());
 					}
 				}
@@ -750,7 +747,7 @@ public class JobsListener implements Listener {
 			return;
 		}
 		int reach = BuilderCommand.reachInstances.get(player.getName());
-		List<Block> blocks = player.getLastTwoTargetBlocks(new HashSet<Byte>(), reach);
+		List<Block> blocks = player.getLastTwoTargetBlocks(new HashSet<Material>(), reach);	//Was HashSet<byte>()
 		if (!MonstersPlus.isBuildLocation(player, blocks.get(0).getLocation())) {
 			return;
 		}
@@ -768,7 +765,7 @@ public class JobsListener implements Listener {
 					}
 					if (MonstersPlus.coreProtect != null) {
 						MonstersPlus.coreProtect.logPlacement(player.getName(), block.getLocation(),
-								player.getItemInHand().getTypeId(), block.getData());
+								player.getItemInHand().getType(), block.getData());
 					}
 				}
 
@@ -791,7 +788,7 @@ public class JobsListener implements Listener {
 
 		@SuppressWarnings("deprecation")
 		ItemStack inhand = player.getItemInHand();
-		if (inhand.getType() != Material.SKULL_ITEM) {
+		if (inhand.getType() != Material.SKELETON_SKULL) {
 			return;
 		}
 		ItemStack frameItem = iframe.getItem();

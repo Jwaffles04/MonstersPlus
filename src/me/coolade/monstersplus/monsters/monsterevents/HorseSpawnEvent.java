@@ -13,6 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+@SuppressWarnings("deprecation")
 public class HorseSpawnEvent {
 	private LivingEntity lent;
 	private String mobName;
@@ -26,6 +27,7 @@ public class HorseSpawnEvent {
 	public HorseSpawnEvent(LivingEntity lent) {
 		this(lent, MonsterList.generateMonster(EntityType.SKELETON));
 	}
+
 
 	public void createMonster() {
 		Horse horse = (Horse) lent;

@@ -45,7 +45,7 @@ public class MonsterUpdater {
 	private static final int COLD_BOMB_RADIUS = 5;
 	private static final int ROCK_SCORP_DAMAGE = 2;
 	private static final double TRACK_STOP_CHANCE = 10;
-	private static final boolean TP_IN_SKYWORLD = false;
+	private static final boolean TP_IN_SKYWORLD = true;
 
 	public MonsterUpdater(EntityDeathEvent event) {
 		// Regular monster death events
@@ -319,6 +319,7 @@ public class MonsterUpdater {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public void updateReformingCreeper(LivingEntity lent) {
 		final int respawnDelay = 80;
 		String msg = ChatColor.GOLD + "The Creeper begins to reform";
@@ -328,6 +329,7 @@ public class MonsterUpdater {
 	public void updateHolySkeleton(LivingEntity lent) {
 		final int respawnDelay = 80;
 		String msg = ChatColor.GOLD + "The Holy Skeleton is Resurrecting";
+		@SuppressWarnings("deprecation")
 		double health = lent.getMaxHealth();
 		new RespawnEntityTask(lent, health, msg, respawnDelay).runTask(MonstersPlus.plugin);
 	}
@@ -395,7 +397,7 @@ public class MonsterUpdater {
 
 		if (Tools.randomChance(50) && MonstersPlus.isSpawnableLocation(loc)
 				&& loc.getWorld().getBlockAt(loc).getType().equals(Material.AIR)) {
-			new PlaceAndCleanTask(Material.WEB, loc, 0, 60);
+			new PlaceAndCleanTask(Material.COBWEB, loc, 0, 60);
 		}
 	}
 
@@ -458,7 +460,7 @@ public class MonsterUpdater {
 				// ice melts.
 				new PlaceAndCleanTask(Material.ICE, block.getLocation(), 0, (int) (seconds * 20));
 				new CleanBlockTask(Material.WATER, Material.AIR, block.getLocation(), (int) (seconds * 20) * 2);
-				new CleanBlockTask(Material.STATIONARY_WATER, Material.AIR, block.getLocation(),
+				new CleanBlockTask(Material.WATER, Material.AIR, block.getLocation(),
 						(int) (seconds * 20) * 2);
 				if (useSlow) {
 					target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 2 * 20, 5));
@@ -495,6 +497,7 @@ public class MonsterUpdater {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void updateJugglerDamaged(LivingEntity damager, LivingEntity target, boolean isProjectile) {
 		final double LIFT = 1.3;
 		if (!target.getWorld().getBlockAt(target.getLocation().add(0, -1, 0)).getType().equals(Material.AIR)) {
@@ -534,7 +537,7 @@ public class MonsterUpdater {
 
 				if (Tools.randomChance(chance) && MonstersPlus.isSpawnableLocation(blockLoc)
 						&& block.getType().equals(Material.AIR)) {
-					new PlaceAndCleanTask(Material.WEB, blockLoc, 2, 60);
+					new PlaceAndCleanTask(Material.COBWEB, blockLoc, 2, 60);
 				}
 			}
 		}
@@ -568,6 +571,7 @@ public class MonsterUpdater {
 				TaskTools.setTriggeredDelayed((amount * repeatDelay + startDelay + cooldown), target, false);
 
 				for (String playerName : Tools.getNearbyPlayers(target.getLocation(), 15)) {
+					//@SuppressWarnings("deprecation") Removed
 					Player player = Bukkit.getPlayer(playerName);
 					player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 4 * 20, 2));
 					Tools.damageEntity(target, player, 4);
@@ -582,6 +586,7 @@ public class MonsterUpdater {
 		target.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 6 * 20, 4));
 	}
 
+	//@SuppressWarnings("deprecation") Removed
 	public void updateAchillesDamaged(LivingEntity damager, LivingEntity target) {
 		teleportEntityToEntity(target, damager, 15);
 		if (Tools.randomChance(15)) {
@@ -592,6 +597,7 @@ public class MonsterUpdater {
 		}
 	}
 
+	//@SuppressWarnings("deprecation") Removed
 	public void updatePigletDamaged(LivingEntity damager, LivingEntity target) {
 		teleportEntityToEntity(target, damager, 35);
 		for (String playerName : Tools.getNearbyPlayers(target.getLocation(), 20)) {
@@ -617,7 +623,7 @@ public class MonsterUpdater {
 
 				if (block.getType().equals(Material.AIR)) {
 					LivingEntity pzomb = (LivingEntity) blockLoc.getWorld().spawnEntity(blockLoc,
-							EntityType.PIG_ZOMBIE);
+							EntityType.PIGLIN);
 					pzomb.getEquipment().setItemInHand(new ItemStack(Material.IRON_AXE));
 					pzomb.getEquipment().setItemInHandDropChance(0F);
 				}
@@ -653,11 +659,12 @@ public class MonsterUpdater {
 
 		if (Tools.randomChance(15)) {
 			for (String playerName : Tools.getNearbyPlayers(target.getLocation(), radius)) {
+				//@SuppressWarnings("deprecation") Removed
 				Player player = Bukkit.getPlayer(playerName);
 				Location loc = player.getLocation();
 				Block block = loc.getWorld().getBlockAt(loc);
 				if (MonstersPlus.isSpawnableLocation(loc) && block.getType().equals(Material.AIR)) {
-					new PlaceAndCleanTask(Material.WEB, loc, 1, 60);
+					new PlaceAndCleanTask(Material.COBWEB, loc, 1, 60);
 				}
 				player.setFireTicks(6 * 20);
 			}
@@ -710,6 +717,7 @@ public class MonsterUpdater {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public static void teleportEntityToEntity(LivingEntity lent1, LivingEntity lent2, double chance) {
 		if (Tools.randomChance(chance)) {
 			if (lent1.getWorld().getName().toLowerCase().contains("skyworld") && !TP_IN_SKYWORLD) {

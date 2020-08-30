@@ -20,7 +20,7 @@ public class BrewList {
 			add(new BrewIngredient(Material.CACTUS, PotionEffectType.HARM, new int[] { 0, 0, 0 }, new int[] { 0, 1, 1 },
 					2, "Cactus - Instant Damage"));
 
-			add(new BrewIngredient(Material.SPECKLED_MELON, PotionEffectType.HEAL, new int[] { 0, 0, 0 },
+			add(new BrewIngredient(Material.GLISTERING_MELON_SLICE, PotionEffectType.HEAL, new int[] { 0, 0, 0 },
 					new int[] { 0, 1, 2 }, 2, "Glistering Melon - Instant Health"));
 
 			add(new BrewIngredient(Material.ROTTEN_FLESH, PotionEffectType.HUNGER, new int[] { 20, 40, 60 },
@@ -41,7 +41,7 @@ public class BrewList {
 			add(new BrewIngredient(Material.SLIME_BALL, PotionEffectType.SLOW, new int[] { 20, 40, 60 },
 					new int[] { 0, 1, 2 }, 2, "Slimeball - Slow"));
 
-			add(new BrewIngredient(Material.INK_SACK, PotionEffectType.SLOW_DIGGING, new int[] { 60, 120, 180 },
+			add(new BrewIngredient(Material.INK_SAC, PotionEffectType.SLOW_DIGGING, new int[] { 60, 120, 180 },
 					new int[] { 0, 1, 2 }, 2, "Ink Sack - Slow Digging"));
 
 			add(new BrewIngredient(Material.SUGAR, PotionEffectType.SPEED, new int[] { 90, 180, 270 },
@@ -68,10 +68,10 @@ public class BrewList {
 			add(new BrewIngredient(Material.IRON_INGOT, PotionEffectType.DAMAGE_RESISTANCE, new int[] { 20, 40, 60 },
 					new int[] { 0, 1, 2 }, 7, "Iron Ingot - Damage Resistance"));
 
-			add(new BrewIngredient(Material.RAW_FISH, PotionEffectType.WATER_BREATHING, new int[] { 120, 240, 360 },
+			add(new BrewIngredient(Material.COD, PotionEffectType.WATER_BREATHING, new int[] { 120, 240, 360 },
 					new int[] { 0, 0, 0 }, 8, "Raw Fish - Water Breathing"));
 
-			add(new BrewIngredient(Material.SULPHUR, "Splash", new int[] { 0, 0, 0 }, new int[] { 0, 0, 0 }, 3,
+			add(new BrewIngredient(Material.GUNPOWDER, "Splash", new int[] { 0, 0, 0 }, new int[] { 0, 0, 0 }, 3,
 					"Gunpowder - Splash Modifier"));
 
 			add(new BrewIngredient(Material.REDSTONE_BLOCK, "Extend 1", new int[] { 0, 0, 0 }, new int[] { 0, 0, 0 }, 6,

@@ -49,6 +49,7 @@ public class SpiderSpawnEvent {
 		this.mobName = mobName;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void createMonster() {
 		// EntityEquipment ee = lent.getEquipment();
 		if (mobName == null) {

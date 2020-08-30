@@ -28,6 +28,7 @@ public class SpawnTask {
 		// a delay
 		// To specify the monster use mobname, sending a string.
 		MonstersPlus.plugin.getServer().getScheduler().scheduleSyncDelayedTask(MonstersPlus.plugin, new Runnable() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
 				if (mobname == "Fire Ant") {

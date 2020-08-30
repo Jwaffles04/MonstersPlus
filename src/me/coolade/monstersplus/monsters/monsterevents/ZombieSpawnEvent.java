@@ -59,13 +59,13 @@ public class ZombieSpawnEvent {
 		Zombie zomb = (Zombie) lent;
 		EntityEquipment ee = lent.getEquipment();
 		zomb.setBaby(false);
-		zomb.setVillager(false);
+//		zomb.setVillager(false);
 		Location loc = lent.getLocation();
 		ee.setHelmetDropChance(0F);
 		ee.setChestplateDropChance(0F);
 		ee.setLeggingsDropChance(0F);
 		ee.setBootsDropChance(0F);
-		ee.setItemInHandDropChance(0F);
+		ee.setItemInMainHandDropChance(0F);
 
 		/** ZOMBIE CHARGER easy **/
 		if (mobName.equalsIgnoreCase("Zombie Charger")) {
@@ -74,27 +74,27 @@ public class ZombieSpawnEvent {
 		/** LUMBER ZOMBIE easy **/
 		else if (mobName.equalsIgnoreCase("Lumber Zombie")) {
 
-			ee.setItemInHand(new ItemStack(Material.GOLD_AXE));
+			ee.setItemInMainHand(new ItemStack(Material.GOLDEN_AXE));
 			ee.setHelmet(new ItemStack(Material.AIR));
 			ee.setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
 			ee.setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
 			ee.setBoots(new ItemStack(Material.LEATHER_BOOTS));
 		} else if (mobName.equalsIgnoreCase("Petty Thief")) {
-			ee.setItemInHand(new ItemStack(Material.IRON_INGOT));
+			ee.setItemInMainHand(new ItemStack(Material.IRON_INGOT));
 			ee.setHelmet(new ItemStack(Material.IRON_HELMET));
 			ee.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
 			ee.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
 			ee.setBoots(new ItemStack(Material.IRON_BOOTS));
-			ee.setItemInHandDropChance(1F);
+			ee.setItemInMainHandDropChance(1F);
 		}
 		/** BURNING WALKER easy **/
 		else if (mobName.equalsIgnoreCase("Burning Walker")) {
 			ItemStack boots = Tools.setItemDisplayName(new ItemStack(Material.DIAMOND_BOOTS),
 					ChatColor.RED + "Fire Treads");
 			boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 6);
-			ee.setItemInHand(new ItemStack(Material.FIREBALL));
+			ee.setItemInMainHand(new ItemStack(Material.FIRE_CHARGE));
 			ee.setBoots(boots);
-			ee.setHelmet(new ItemStack(Material.SKULL_ITEM, 1, (short) 1));
+			ee.setHelmet(new ItemStack(Material.SKELETON_SKULL, 1, (short) 1));
 			ee.setBootsDropChance(DROP_CHANCE);
 
 			lent.addPotionEffect(
@@ -103,18 +103,18 @@ public class ZombieSpawnEvent {
 		} else if (mobName.equalsIgnoreCase("Zombie Reaper")) {
 			ItemStack inhand = new ItemStack(Material.IRON_HOE);
 			inhand.addUnsafeEnchantment(Enchantment.KNOCKBACK, 2);
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 		} else if (mobName.equalsIgnoreCase("Zombie Fisherman")) {
 			ItemStack inhand = new ItemStack(Material.FISHING_ROD);
 			inhand.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 1);
 			inhand.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);
 			CustomEnchantCommand.enchantmentList.addCustomEnchantment(inhand, "Sharp Hook", 2);
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 			ee.setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
 			ee.setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
 			ee.setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
 			ee.setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-			ee.setItemInHandDropChance(DROP_CHANCE);
+			ee.setItemInMainHandDropChance(DROP_CHANCE);
 		} else if (mobName.equalsIgnoreCase("Rotten Fighter")) {
 			lent.addPotionEffect(
 					new PotionEffect(PotionEffectType.INCREASE_DAMAGE, MonsterListener.POTION_DURATION, 1));
@@ -123,7 +123,7 @@ public class ZombieSpawnEvent {
 			item.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 			item.addUnsafeEnchantment(Enchantment.OXYGEN, 2);
 			item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-			ee.setItemInHand(new ItemStack(Material.AIR));
+			ee.setItemInMainHand(new ItemStack(Material.AIR));
 			ee.setHelmet(new ItemStack(Material.DIAMOND_HELMET));
 			ee.setChestplate(new ItemStack(Material.AIR));
 			ee.setLeggings(item);
@@ -132,8 +132,8 @@ public class ZombieSpawnEvent {
 		} else if (mobName.equalsIgnoreCase("Lame Brain")) {
 			lent.addPotionEffect(
 					new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, MonsterListener.POTION_DURATION, 1));
-			ItemStack helm = new ItemStack(Material.GOLD_HELMET);
-			ItemStack leg = new ItemStack(Material.GOLD_LEGGINGS);
+			ItemStack helm = new ItemStack(Material.GOLDEN_HELMET);
+			ItemStack leg = new ItemStack(Material.GOLDEN_LEGGINGS);
 			ItemStack inhand = Tools.setItemDisplayName(new ItemStack(Material.SLIME_BALL),
 					ChatColor.GREEN + "Brainzzzz");
 			helm.addUnsafeEnchantment(Enchantment.THORNS, 2);
@@ -141,34 +141,34 @@ public class ZombieSpawnEvent {
 			inhand.addUnsafeEnchantment(Enchantment.DAMAGE_ARTHROPODS, 5);
 			inhand.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
 
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 			ee.setHelmet(helm);
 			ee.setLeggings(leg);
 
-			ee.setItemInHandDropChance(DROP_CHANCE);
+			ee.setItemInMainHandDropChance(DROP_CHANCE);
 		} else if (mobName.equalsIgnoreCase("Zombie Climber")) {
 			ItemStack helm = new ItemStack(Material.AIR);
 			ItemStack leg = new ItemStack(Material.LEATHER_LEGGINGS);
 			ItemStack chest = new ItemStack(Material.AIR);
 			ItemStack boot = new ItemStack(Material.LEATHER_BOOTS);
-			ItemStack inhand = Tools.setItemDisplayName(new ItemStack(Material.LEASH),
+			ItemStack inhand = Tools.setItemDisplayName(new ItemStack(Material.LEAD),
 					ChatColor.GOLD + "Mountaineers Rope");
 			inhand.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 			inhand.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MOBS, 3);
 
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 			ee.setHelmet(helm);
 			ee.setLeggings(leg);
 			ee.setChestplate(chest);
 			ee.setBoots(boot);
 
-			ee.setItemInHandDropChance(DROP_CHANCE);
+			ee.setItemInMainHandDropChance(DROP_CHANCE);
 		}
 		/** UNDEAD MONK Medium **/
 		else if (mobName.equalsIgnoreCase("Undead Monk")) {
 			lent.addPotionEffect(
 					new PotionEffect(PotionEffectType.INCREASE_DAMAGE, MonsterListener.POTION_DURATION, 1));
-			ee.setHelmet(new ItemStack(Material.SKULL_ITEM, 1, (short) 3));
+			ee.setHelmet(new ItemStack(Material.PLAYER_HEAD, 1, (short) 3));
 			ee.setHelmetDropChance((float) .25);
 		}
 		/** Lunatic Medium **/
@@ -180,32 +180,32 @@ public class ZombieSpawnEvent {
 			cactus.addUnsafeEnchantment(Enchantment.KNOCKBACK, 2);
 			cactus.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 4);
 			cactus.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);
-			ee.setItemInHand(cactus);
-			ee.setItemInHandDropChance(DROP_CHANCE);
+			ee.setItemInMainHand(cactus);
+			ee.setItemInMainHandDropChance(DROP_CHANCE);
 		}
 		/** TheRestless Medium **/
 		else if (mobName.equalsIgnoreCase("The Restless")) {
 			zomb.setBaby(false);
 			zomb.setVillager(false);
-			ItemStack bed = Tools.setItemDisplayName(new ItemStack(Material.LEASH), ChatColor.DARK_BLUE + "The Dream");
+			ItemStack bed = Tools.setItemDisplayName(new ItemStack(Material.LEAD), ChatColor.DARK_BLUE + "The Dream");
 			CustomEnchantCommand.enchantmentList.addCustomEnchantment(bed, "Wither Aspect", 1);
-			ee.setItemInHand(bed);
-			ee.setItemInHandDropChance(DROP_CHANCE);
+			ee.setItemInMainHand(bed);
+			ee.setItemInMainHandDropChance(DROP_CHANCE);
 		}
 		/** Rotting Jack MEDIUM **/
 		else if (mobName.equalsIgnoreCase("Rotting Jack")) {
 			MonstersPlus.setSpeed(lent, 0.40);
 			ItemStack helm = Tools.setItemDisplayName(new ItemStack(Material.JACK_O_LANTERN),
 					ChatColor.GOLD + "Jack Mask");
-			ItemStack item = Tools.setItemDisplayName(new ItemStack(Material.GOLD_AXE), ChatColor.GOLD + "Jack Hack");
+			ItemStack item = Tools.setItemDisplayName(new ItemStack(Material.GOLDEN_AXE), ChatColor.GOLD + "Jack Hack");
 			helm.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 2);
 			helm.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
 			helm.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MOBS, 1);
 			item.addUnsafeEnchantment(Enchantment.DIG_SPEED, 3);
 			item.addUnsafeEnchantment(Enchantment.DAMAGE_ARTHROPODS, 2);
-			ee.setItemInHand(item);
+			ee.setItemInMainHand(item);
 			ee.setHelmet(helm);
-			ee.setItemInHandDropChance(DROP_CHANCE);
+			ee.setItemInMainHandDropChance(DROP_CHANCE);
 			ee.setHelmetDropChance(DROP_CHANCE);
 		}
 		/** Stink Swarm MEDIUM **/
@@ -234,12 +234,12 @@ public class ZombieSpawnEvent {
 			ee.setHelmet(cactus);
 			ee.setLeggingsDropChance(0.05F);
 		} else if (mobName.equalsIgnoreCase("Hardened Thief")) {
-			ee.setItemInHand(new ItemStack(Material.GOLD_INGOT));
-			ee.setHelmet(new ItemStack(Material.GOLD_HELMET));
-			ee.setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
-			ee.setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
-			ee.setBoots(new ItemStack(Material.GOLD_BOOTS));
-			ee.setItemInHandDropChance(1F);
+			ee.setItemInMainHand(new ItemStack(Material.GOLD_INGOT));
+			ee.setHelmet(new ItemStack(Material.GOLDEN_HELMET));
+			ee.setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS));
+			ee.setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
+			ee.setBoots(new ItemStack(Material.GOLDEN_BOOTS));
+			ee.setItemInMainHandDropChance(1F);
 		} else if (mobName.equalsIgnoreCase("Famished Lurker")) {
 			lent.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, MonsterListener.POTION_DURATION, 1));
 			lent.addPotionEffect(
@@ -251,7 +251,7 @@ public class ZombieSpawnEvent {
 			item.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
 			CustomEnchantCommand.enchantmentList.addCustomEnchantment(item, "Poverty Barrier", 1);
 
-			ee.setItemInHand(new ItemStack(Material.STICK));
+			ee.setItemInMainHand(new ItemStack(Material.STICK));
 			ee.setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
 			ee.setLeggings(item);
 			ee.setChestplateDropChance(DROP_CHANCE);
@@ -263,15 +263,15 @@ public class ZombieSpawnEvent {
 			item.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 3);
 			CustomEnchantCommand.enchantmentList.addCustomEnchantment(item, "Ice Aspect", 1);
 
-			ee.setItemInHand(new ItemStack(Material.IRON_SWORD));
+			ee.setItemInMainHand(new ItemStack(Material.IRON_SWORD));
 			ee.setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
 			ee.setBoots(new ItemStack(Material.LEATHER_BOOTS));
 			ee.setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
 			ee.setHelmet(item);
 			ee.setHelmetDropChance(DROP_CHANCE);
 		} else if (mobName.equalsIgnoreCase("Frosted Biter")) {
-			ee.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
-			ee.setItemInHandDropChance(DROP_CHANCE);
+			ee.setItemInMainHand(new ItemStack(Material.DIAMOND_SWORD));
+			ee.setItemInMainHandDropChance(DROP_CHANCE);
 		} else if (mobName.equalsIgnoreCase("Arctic Zed")) {
 			MonstersPlus.setSpeed(lent, 0.29);
 			ItemStack inhand = Tools.setItemDisplayName(new ItemStack(Material.DIAMOND_HOE),
@@ -279,10 +279,10 @@ public class ZombieSpawnEvent {
 			inhand.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
 			CustomEnchantCommand.enchantmentList.addCustomEnchantment(inhand, "Hydration", 1);
 
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 			ee.setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
 			ee.setBoots(new ItemStack(Material.DIAMOND_BOOTS));
-			ee.setItemInHandDropChance(DROP_CHANCE);
+			ee.setItemInMainHandDropChance(DROP_CHANCE);
 		}
 		/** UNDYING Hard **/
 		else if (mobName.equalsIgnoreCase("Undying")) {
@@ -295,22 +295,22 @@ public class ZombieSpawnEvent {
 			hoe.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 2);
 			hoe.addUnsafeEnchantment(Enchantment.DAMAGE_ARTHROPODS, 1);
 
-			ee.setItemInHand(hoe);
+			ee.setItemInMainHand(hoe);
 			ee.setHelmet(new ItemStack(Material.AIR));
 			ee.setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
 			ee.setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
 			ee.setBoots(new ItemStack(Material.LEATHER_BOOTS));
 
-			ee.setItemInHandDropChance(DROP_CHANCE);
+			ee.setItemInMainHandDropChance(DROP_CHANCE);
 		} else if (mobName.equalsIgnoreCase("Royal Thief")) {
-			ee.setItemInHand(new ItemStack(Material.DIAMOND));
+			ee.setItemInMainHand(new ItemStack(Material.DIAMOND));
 			ee.setHelmet(new ItemStack(Material.DIAMOND_HELMET));
 			ee.setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));
 			ee.setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
 			ee.setBoots(new ItemStack(Material.DIAMOND_BOOTS));
-			ee.setItemInHandDropChance(1F);
+			ee.setItemInMainHandDropChance(1F);
 		} else if (mobName.equalsIgnoreCase("Burnt Ghoul")) {
-			ee.setItemInHand(new ItemStack(Material.IRON_SWORD));
+			ee.setItemInMainHand(new ItemStack(Material.IRON_SWORD));
 			ee.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
 			ee.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
 		} else if (mobName.equalsIgnoreCase("Qactuar")) {
@@ -329,10 +329,10 @@ public class ZombieSpawnEvent {
 		/** ATILLA Legendary **/
 		else if (mobName.equalsIgnoreCase("Atilla")) {
 			MonstersPlus.setAttack(lent, 20);
-			ItemStack helm = new ItemStack(Material.GOLD_HELMET);
-			ItemStack leg = new ItemStack(Material.GOLD_LEGGINGS);
-			ItemStack chest = new ItemStack(Material.GOLD_CHESTPLATE);
-			ItemStack boot = new ItemStack(Material.GOLD_BOOTS);
+			ItemStack helm = new ItemStack(Material.GOLDEN_HELMET);
+			ItemStack leg = new ItemStack(Material.GOLDEN_LEGGINGS);
+			ItemStack chest = new ItemStack(Material.GOLDEN_CHESTPLATE);
+			ItemStack boot = new ItemStack(Material.GOLDEN_BOOTS);
 			ItemStack tnt = new ItemStack(Material.TNT);
 			tnt.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 6);
 			helm.addUnsafeEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 30);
@@ -341,7 +341,7 @@ public class ZombieSpawnEvent {
 			chest.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 8);
 			boot.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 90);
 
-			ee.setItemInHand(tnt);
+			ee.setItemInMainHand(tnt);
 			ee.setHelmet(helm);
 			ee.setLeggings(leg);
 			ee.setChestplate(chest);
@@ -363,7 +363,7 @@ public class ZombieSpawnEvent {
 			boot.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 			chest.addUnsafeEnchantment(Enchantment.THORNS, 6);
 
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 			ee.setLeggings(leg);
 			ee.setChestplate(chest);
 			ee.setBoots(boot);
@@ -374,7 +374,7 @@ public class ZombieSpawnEvent {
 			lent.addPotionEffect(
 					new PotionEffect(PotionEffectType.FIRE_RESISTANCE, MonsterListener.POTION_DURATION, 50));
 
-			ItemStack helm = new ItemStack(Material.SKULL_ITEM, 1, (short) 5);
+			ItemStack helm = new ItemStack(Material.DRAGON_HEAD, 1, (short) 5);
 			ItemStack leg = new ItemStack(Material.DIAMOND_LEGGINGS);
 			ItemStack chest = new ItemStack(Material.DIAMOND_CHESTPLATE);
 			ItemStack boot = new ItemStack(Material.IRON_BOOTS);
@@ -387,7 +387,7 @@ public class ZombieSpawnEvent {
 			chest.addUnsafeEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 90);
 			boot.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 			ee.setHelmet(helm);
 			ee.setLeggings(leg);
 			ee.setChestplate(chest);
@@ -410,7 +410,7 @@ public class ZombieSpawnEvent {
 			chest.addUnsafeEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 90);
 			boot.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 			ee.setHelmet(helm);
 			ee.setLeggings(leg);
 			ee.setChestplate(chest);
@@ -475,7 +475,7 @@ public class ZombieSpawnEvent {
 			chest.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 90);
 			boot.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 7);
 
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 			ee.setLeggings(leg);
 			ee.setChestplate(chest);
 			ee.setBoots(boot);
@@ -483,7 +483,7 @@ public class ZombieSpawnEvent {
 		/** Piglet Legendary **/
 		else if (mobName.equalsIgnoreCase("Piglet")) {
 			lent.remove();
-			lent = (LivingEntity) loc.getWorld().spawnEntity(loc, EntityType.PIG_ZOMBIE);
+			lent = (LivingEntity) loc.getWorld().spawnEntity(loc, EntityType.ZOMBIFIED_PIGLIN);
 
 			lent.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, MonsterListener.POTION_DURATION, 5));
 			lent.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, MonsterListener.POTION_DURATION, 2));
@@ -493,12 +493,12 @@ public class ZombieSpawnEvent {
 			ItemStack inhand = new ItemStack(Material.DIAMOND_SWORD);
 			inhand.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 42);
 
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 		}
 		/** Wilbur Legendary **/
 		else if (mobName.equalsIgnoreCase("Wilbur")) {
 			lent.remove();
-			lent = (LivingEntity) loc.getWorld().spawnEntity(loc, EntityType.PIG_ZOMBIE);
+			lent = (LivingEntity) loc.getWorld().spawnEntity(loc, EntityType.ZOMBIFIED_PIGLIN);
 			lent.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, MonsterListener.POTION_DURATION, 8));
 			lent.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, MonsterListener.POTION_DURATION, 2));
 			lent.addPotionEffect(
@@ -506,7 +506,7 @@ public class ZombieSpawnEvent {
 
 			ItemStack inhand = new ItemStack(Material.DIAMOND_SWORD);
 			inhand.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 42);
-			ee.setItemInHand(inhand);
+			ee.setItemInMainHand(inhand);
 		}
 
 		double health = MonsterList.getMaxHealth(mobName);

@@ -38,7 +38,7 @@ public class MonsterList {
 	public static final double PSTONE_EASY = 2.0;
 	public static final double PSTONE_MEDIUM = 3.75;
 	public static final double PSTONE_HARD = 15;
-	public static final double PSTONE_LEGENDARY = 125;
+	public static final double PSTONE_LEGENDARY = 200;
 	public static ArrayList<MonsterStruct> listOfMonsters = new ArrayList<MonsterStruct>() {
 		private static final long serialVersionUID = 1L;
 
@@ -169,6 +169,7 @@ public class MonsterList {
 			add(new MonsterStruct("Plague Stallion", 125, EntityType.HORSE, SPECIAL));
 		}
 	};
+	@SuppressWarnings("deprecation")
 	public static ArrayList<MonsterTrophy> trophyList = new ArrayList<MonsterTrophy>() {
 		private static final long serialVersionUID = 1L;
 
@@ -176,8 +177,8 @@ public class MonsterList {
 			add(new MonsterTrophy("Atilla", ChatColor.RED + "Atilla Killa", new ItemStack(Material.TNT),
 					Enchantment.PROTECTION_EXPLOSIONS, 3));
 			add(new MonsterTrophy("Sleepy Hollow", ChatColor.DARK_BLUE + "Sleepy's Missing Head",
-					new ItemStack(Material.SKULL_ITEM, 1, (short) 2), Enchantment.KNOCKBACK, 2));
-			add(new MonsterTrophy("Hyde", ChatColor.AQUA + "Hyde's Hide", new ItemStack(Material.FIREBALL),
+					new ItemStack(Material.SKELETON_SKULL, 1, (short) 2), Enchantment.KNOCKBACK, 2));
+			add(new MonsterTrophy("Hyde", ChatColor.AQUA + "Hyde's Hide", new ItemStack(Material.FIRE_CHARGE),
 					Enchantment.PROTECTION_EXPLOSIONS, 2));
 			add(new MonsterTrophy("Juggler", ChatColor.GOLD + "Juggler's Sticky Ball",
 					new ItemStack(Material.SLIME_BALL), Enchantment.THORNS, 1));
@@ -187,14 +188,14 @@ public class MonsterList {
 					new ItemStack(Material.BLAZE_ROD), Enchantment.DIG_SPEED, 2));
 			add(new MonsterTrophy("Achilles", ChatColor.WHITE + "Achilles' Divine Arrow", new ItemStack(Material.ARROW),
 					Enchantment.DAMAGE_UNDEAD, 3));
-			add(new MonsterTrophy("Piglet", ChatColor.RED + "Piglet Bacon", new ItemStack(Material.PORK),
+			add(new MonsterTrophy("Piglet", ChatColor.RED + "Piglet Bacon", new ItemStack(Material.PORKCHOP),
 					Enchantment.DURABILITY, 2));
 			add(new MonsterTrophy("Wilbur", ChatColor.GREEN + "Wilbur's Son",
-					new ItemStack(Material.MONSTER_EGG, 1, (short) 90), Enchantment.ARROW_DAMAGE, 1));
+					new ItemStack(Material.PIG_SPAWN_EGG, 1, (short) 90), Enchantment.ARROW_DAMAGE, 1));
 			add(new MonsterTrophy("Legolas", ChatColor.DARK_GREEN + "Legolas' Leg", new ItemStack(Material.BONE),
 					Enchantment.DURABILITY, 2));
 			add(new MonsterTrophy("Hawkeye", ChatColor.DARK_AQUA + "Hawkeye's Eye",
-					new ItemStack(Material.EYE_OF_ENDER), Enchantment.ARROW_DAMAGE, 1));
+					new ItemStack(Material.ENDER_EYE), Enchantment.ARROW_DAMAGE, 1));
 			add(new MonsterTrophy("Tickles", ChatColor.DARK_GRAY + "Tickle's Tickler", new ItemStack(Material.FEATHER),
 					Enchantment.LOOT_BONUS_BLOCKS, 1));
 			add(new MonsterTrophy("Captain Ahab", ChatColor.DARK_BLUE + "Ahab's Ancient Rod",
@@ -203,19 +204,19 @@ public class MonsterList {
 					new ItemStack(Material.MAGMA_CREAM), Enchantment.ARROW_FIRE, 1));
 			add(new MonsterTrophy("Hadamard", ChatColor.GOLD + "Hadamard Jelly", new ItemStack(Material.SLIME_BALL),
 					Enchantment.ARROW_INFINITE, 1));
-			add(new MonsterTrophy("Lesath", ChatColor.RED + "Lesath's Web", new ItemStack(Material.WEB),
+			add(new MonsterTrophy("Lesath", ChatColor.RED + "Lesath's Web", new ItemStack(Material.COBWEB),
 					Enchantment.PROTECTION_ENVIRONMENTAL, 3));
 			add(new MonsterTrophy("Shelob", ChatColor.YELLOW + "Shelob's Child", new ItemStack(Material.EGG),
 					Enchantment.DAMAGE_ARTHROPODS, 2));
 			add(new MonsterTrophy("Arachne", ChatColor.GOLD + "Arachne's Rotten Eyeball",
 					new ItemStack(Material.FERMENTED_SPIDER_EYE), Enchantment.FIRE_ASPECT, 1));
-			add(new MonsterTrophy("Charlotte", ChatColor.DARK_AQUA + "Charlotte's Web", new ItemStack(Material.WEB),
+			add(new MonsterTrophy("Charlotte", ChatColor.DARK_AQUA + "Charlotte's Web", new ItemStack(Material.COBWEB),
 					Enchantment.ARROW_FIRE, 3));
-			add(new MonsterTrophy("Raikou", ChatColor.AQUA + "Raikou's Collar", new ItemStack(Material.LEASH),
+			add(new MonsterTrophy("Raikou", ChatColor.AQUA + "Raikou's Collar", new ItemStack(Material.LEAD),
 					Enchantment.PROTECTION_ENVIRONMENTAL, 2));
-			add(new MonsterTrophy("Entei", ChatColor.DARK_RED + "Entei's Collar", new ItemStack(Material.LEASH),
+			add(new MonsterTrophy("Entei", ChatColor.DARK_RED + "Entei's Collar", new ItemStack(Material.LEAD),
 					Enchantment.PROTECTION_ENVIRONMENTAL, 2));
-			add(new MonsterTrophy("Suicune", ChatColor.DARK_BLUE + "Suicune's Collar", new ItemStack(Material.LEASH),
+			add(new MonsterTrophy("Suicune", ChatColor.DARK_BLUE + "Suicune's Collar", new ItemStack(Material.LEAD),
 					Enchantment.PROTECTION_ENVIRONMENTAL, 2));
 			add(new MonsterTrophy("Barkira", ChatColor.GRAY + "Barkira's Bone", new ItemStack(Material.BONE),
 					Enchantment.DAMAGE_UNDEAD, 1));
@@ -392,6 +393,7 @@ public class MonsterList {
 		return -1;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static boolean isCustomMonster(String name, LivingEntity lent) {
 		if (hasCustomName(lent)) {
 			MonsterStruct monster = getMonster(name);
@@ -419,6 +421,7 @@ public class MonsterList {
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static boolean isCustomMonster(LivingEntity lent) {
 		if (hasCustomName(lent)) {
 			for (MonsterStruct monStru : listOfMonsters) {
@@ -659,15 +662,20 @@ public class MonsterList {
 			double chance = 0;
 			if (difficulty == MonsterList.EASY) {
 				chance = PSTONE_EASY;
-			} else if (difficulty == MonsterList.MEDIUM) {
+			} 
+			else if (difficulty == MonsterList.MEDIUM) {
 				chance = PSTONE_MEDIUM;
-			} else if (difficulty == MonsterList.HARD) {
+			} 
+			else if (difficulty == MonsterList.HARD) {
 				chance = PSTONE_HARD;
+			}
+			else if (difficulty == MonsterList.LEGENDARY) {
+				chance = PSTONE_LEGENDARY;
 			}
 
 			if (difficulty == MonsterList.LEGENDARY) {
-				Tools.spawnPowerstone(lent.getLocation(), (int) (PSTONE_LEGENDARY / 100));
-				chance = PSTONE_LEGENDARY % 100;
+				Tools.spawnPowerstone(lent.getLocation(), (int) (PSTONE_LEGENDARY));
+				chance = PSTONE_LEGENDARY % 1000;
 			}
 
 			if (Tools.randomChance(chance)) {
